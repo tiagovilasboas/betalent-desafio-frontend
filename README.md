@@ -4,15 +4,18 @@ Solução para o teste técnico front-end da BeTalent - interface responsiva par
 
 ## 📋 Sobre o Desafio
 
-Este projeto foi desenvolvido como solução para o [Teste Técnico Front-end da BeTalent](https://github.com/BeMobile/teste-pratico-frontend), que consiste em construir uma interface responsiva para exibir uma tabela de colaboradores com dados vindos de uma API simulada.
+Este projeto foi desenvolvido como solução para o **Teste Prático Front-end BeTalent**, seguindo tanto o [repositório oficial](https://github.com/BeMobile/teste-pratico-frontend) quanto o documento de requisitos compartilhado.
+
+O desafio consiste em construir uma interface responsiva que exiba uma tabela de colaboradores com funcionalidade de pesquisa, seguindo o mockup fornecido no Figma.
 
 ### 🎯 Requisitos Implementados
 
-- ✅ **Tabela de Colaboradores**: Exibe imagem, nome, cargo, data de admissão e telefone
-- ✅ **Funcionalidade de Pesquisa**: Filtra por cargo, nome e telefone
-- ✅ **Layout Responsivo**: Desktop (tabela) e mobile (cards)
+- ✅ **Tabela de Colaboradores**: Exibe imagem (thumb do usuário), nome, cargo, data de admissão e telefone
+- ✅ **Funcionalidade de Pesquisa**: Input que filtra por cargo, nome e telefone
 - ✅ **Formatação de Dados**: Datas e telefones formatados no front-end
+- ✅ **Layout Responsivo**: Desktop e mobile
 - ✅ **API Simulada**: Integração com json-server
+- ✅ **Tecnologias**: React.js com TypeScript (diferencial)
 
 ## 🚀 Como Executar
 
@@ -122,10 +125,10 @@ npm run test:ci
 ## 🎯 Critérios de Avaliação
 
 ### ✅ Implementados
-- **Lógica de programação**: Código limpo e bem estruturado
-- **Organização**: Arquitetura em camadas e commits organizados
+- **Lógica de programação**: Código limpo e bem estruturado (SRP + Clean Code)
+- **Organização**: Arquitetura em camadas e commits organizados (Dependency Rule)
 - **CSS/Estilização**: Design responsivo e consistente
-- **README**: Documentação completa
+- **README**: Documentação detalhada com instruções e screenshots
 - **TypeScript**: Tipagem completa (diferencial)
 
 ## 📄 Licença
