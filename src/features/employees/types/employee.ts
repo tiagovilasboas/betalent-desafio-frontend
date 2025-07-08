@@ -20,7 +20,16 @@ export interface EmployeeState {
   loading: boolean;
   error: string | null;
   filters: EmployeeFilters;
+  
+  // Métodos de leitura
   fetchEmployees: () => Promise<void>;
+  
+  // Métodos de escrita
+  createEmployee: (employee: Omit<Employee, 'id'>) => Promise<Employee>;
+  updateEmployee: (id: number, employee: Partial<Employee>) => Promise<Employee>;
+  deleteEmployee: (id: number) => Promise<void>;
+  
+  // Métodos de filtro
   setFilters: (filters: EmployeeFilters) => void;
   clearFilters: () => void;
   clearError: () => void;

@@ -4,7 +4,22 @@ import { useEmployeesStore } from '../store/useEmployeesStore';
 import { formatCurrency, formatDate } from '../types/formatters';
 
 export function EmployeeTable() {
-  const { filteredEmployees } = useEmployeesStore();
+  const { filteredEmployees, deleteEmployee } = useEmployeesStore();
+
+  const handleDelete = async (id: number) => {
+    if (confirm('Tem certeza que deseja excluir este colaborador?')) {
+      try {
+        await deleteEmployee(id);
+      } catch (error) {
+        console.error('Erro ao deletar colaborador:', error);
+      }
+    }
+  };
+
+  const handleEdit = (id: number) => {
+    // TODO: Implementar modal de edição
+    console.log('Editar colaborador:', id);
+  };
 
   const rows = filteredEmployees.map((employee) => (
     <Table.Tr key={employee.id}>
@@ -25,16 +40,26 @@ export function EmployeeTable() {
         <Text size="sm">{formatDate(employee.admission_date)}</Text>
       </Table.Td>
       <Table.Td>
-        <Text fw={600} c="green.6">
-          {formatCurrency(5000)}
+        <Text fw={500} c="green.6">
+          {formatCurrency(5000)} {/* Mock data */}
         </Text>
       </Table.Td>
       <Table.Td>
         <Group gap="xs">
-          <ActionIcon variant="subtle" color="blue" size="sm">
+          <ActionIcon
+            variant="subtle"
+            color="blue"
+            onClick={() => handleEdit(employee.id)}
+            title="Editar"
+          >
             <IconEdit size={16} />
           </ActionIcon>
-          <ActionIcon variant="subtle" color="red" size="sm">
+          <ActionIcon
+            variant="subtle"
+            color="red"
+            onClick={() => handleDelete(employee.id)}
+            title="Excluir"
+          >
             <IconTrash size={16} />
           </ActionIcon>
         </Group>
@@ -43,7 +68,7 @@ export function EmployeeTable() {
   ));
 
   return (
-    <Table striped highlightOnHover withTableBorder withColumnBorders>
+    <Table striped highlightOnHover withTableBorder>
       <Table.Thead>
         <Table.Tr>
           <Table.Th>Nome</Table.Th>
