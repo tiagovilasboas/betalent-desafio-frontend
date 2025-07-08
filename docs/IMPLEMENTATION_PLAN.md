@@ -2,16 +2,31 @@
 
 ## 🎯 Resumo
 
-Plano simplificado para implementar a solução do [Teste Técnico Front-end da BeTalent](https://github.com/BeMobile/teste-pratico-frontend).
+Plano simplificado para implementar a solução do [Teste Técnico Front-end da BeTalent](https://github.com/BeMobile/teste-pratico-frontend), seguindo princípios de **Clean Architecture** e **Clean Code**.
 
 ### Objetivo
 Desenvolver uma interface responsiva que exiba uma tabela de colaboradores com funcionalidade de pesquisa.
+
+### 🏗️ Princípios Aplicados
+
+#### **SRP (Single Responsibility Principle)**
+- Cada componente/função tem uma única responsabilidade
+- Separação clara entre UI, lógica e dados
+
+#### **Clean Code**
+- Nomes descritivos e claros
+- Funções pequenas e legíveis
+- Código autoexplicativo
+
+#### **Dependency Rule**
+- Dependências apontam do exterior para o interior
+- UI → Hooks → Services → API
 
 ---
 
 ## 🚀 Etapas de Implementação
 
-### 1. Setup (30 min)
+### 1. Setup e Arquitetura (30 min)
 
 #### 1.1 Configurar API
 ```bash
@@ -26,17 +41,27 @@ cd teste-pratico-frontend
 json-server --watch db.json --port 3001
 ```
 
-#### 1.2 Criar Feature
+#### 1.2 Criar Feature (Seguindo Clean Architecture)
 ```bash
 # Gerar feature employees
 npm run plop -- feature
 # Responder: employees
 ```
 
-### 2. Tipos e Utilitários (30 min)
+#### 1.3 Estrutura de Camadas
+```
+src/features/employees/
+├── components/           # Camada de Apresentação
+├── api/                  # Camada Externa (Infraestrutura)
+├── store/                # Camada de Estado
+└── types/                # Camada de Domínio
+```
 
-#### 2.1 Interface Employee
+### 2. Domínio e Tipos (30 min)
+
+#### 2.1 Interface Employee (Domínio)
 ```typescript
+// types/employee.ts - Camada de Domínio
 interface Employee {
   id: string;
   name: string;
@@ -45,51 +70,63 @@ interface Employee {
   phone: string;
   image: string;
 }
+
+// SRP: Esta interface tem uma única responsabilidade - definir contrato
 ```
 
-#### 2.2 Funções de Formatação
+#### 2.2 Funções de Formatação (Utilitários Puros)
 ```typescript
-// utils/dateFormatter.ts
+// utils/dateFormatter.ts - Função pura, sem dependências externas
 export const formatDate = (dateString: string): string => {
   return new Date(dateString).toLocaleDateString('pt-BR');
 };
 
-// utils/phoneFormatter.ts
+// utils/phoneFormatter.ts - Função pura, sem dependências externas
 export const formatPhone = (phone: string): string => {
   const cleaned = phone.replace(/\D/g, '');
   const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
   return match ? `(${match[1]}) ${match[2]}-${match[3]}` : phone;
 };
+
+// SRP: Cada função tem uma única responsabilidade
+// Clean Code: Nomes descritivos e funções pequenas
 ```
 
-### 3. API e Estado (1h)
+### 3. Camada de Serviços (1h)
 
-#### 3.1 API Client
+#### 3.1 API Client (Camada Externa)
 ```typescript
+// api/employeeApi.ts - Camada de Infraestrutura
 const API_BASE_URL = 'http://localhost:3001';
 
 export const employeeApi = {
+  // SRP: Responsabilidade única - comunicação HTTP
   async getAllEmployees(): Promise<Employee[]> {
     const response = await fetch(`${API_BASE_URL}/employees`);
     return response.json();
   }
 };
+
+// Dependency Rule: Esta camada é a mais externa
 ```
 
-#### 3.2 Store Zustand
+#### 3.2 Store Zustand (Camada de Estado)
 ```typescript
+// store/useEmployeesStore.ts - Camada de Aplicação
 export const useEmployeesStore = create<EmployeeState>((set, get) => ({
   employees: [],
   filteredEmployees: [],
   loading: false,
   filters: { search: '' },
 
+  // SRP: Responsabilidade única - buscar dados
   fetchEmployees: async () => {
     set({ loading: true });
     const employees = await employeeApi.getAllEmployees();
     set({ employees, filteredEmployees: employees, loading: false });
   },
 
+  // SRP: Responsabilidade única - filtrar dados
   setFilters: (filters) => {
     const { employees } = get();
     const filtered = employees.filter(employee => {
@@ -103,15 +140,19 @@ export const useEmployeesStore = create<EmployeeState>((set, get) => ({
     set({ filters, filteredEmployees: filtered });
   }
 }));
+
+// Dependency Rule: Depende da camada de infraestrutura (API)
 ```
 
-### 4. Componentes (2h)
+### 4. Camada de Apresentação (2h)
 
-#### 4.1 Pesquisa
+#### 4.1 Pesquisa (UI Pura)
 ```typescript
+// components/EmployeeSearch.tsx - Camada de Apresentação
 export function EmployeeSearch() {
   const { filters, setFilters } = useEmployeesStore();
   
+  // SRP: Responsabilidade única - capturar input do usuário
   return (
     <TextInput
       placeholder="Pesquisar por nome, cargo ou telefone..."
@@ -121,13 +162,17 @@ export function EmployeeSearch() {
     />
   );
 }
+
+// Dependency Rule: Depende da camada de estado
 ```
 
-#### 4.2 Tabela
+#### 4.2 Tabela (UI Pura)
 ```typescript
+// components/EmployeeTable.tsx - Camada de Apresentação
 export function EmployeeTable() {
   const { filteredEmployees, loading } = useEmployeesStore();
   
+  // SRP: Responsabilidade única - exibir dados em tabela
   return (
     <Table>
       <Table.Thead>
@@ -156,13 +201,17 @@ export function EmployeeTable() {
     </Table>
   );
 }
+
+// Dependency Rule: Depende da camada de estado e utilitários
 ```
 
-#### 4.3 Cards Mobile
+#### 4.3 Cards Mobile (UI Pura)
 ```typescript
+// components/EmployeeCard.tsx - Camada de Apresentação
 export function EmployeeCard() {
   const { filteredEmployees } = useEmployeesStore();
   
+  // SRP: Responsabilidade única - exibir dados em cards
   return (
     <Stack gap="md">
       {filteredEmployees.map((employee) => (
@@ -181,10 +230,13 @@ export function EmployeeCard() {
     </Stack>
   );
 }
+
+// Dependency Rule: Depende da camada de estado e utilitários
 ```
 
-#### 4.4 Componente Principal
+#### 4.4 Componente Principal (Orquestrador)
 ```typescript
+// components/Employees.tsx - Camada de Apresentação
 export function Employees() {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { fetchEmployees, filteredEmployees } = useEmployeesStore();
@@ -193,6 +245,7 @@ export function Employees() {
     fetchEmployees();
   }, [fetchEmployees]);
 
+  // SRP: Responsabilidade única - orquestrar componentes
   return (
     <Container size="xl" py="xl">
       <Title order={1} mb="lg" ta="center">Colaboradores</Title>
@@ -201,10 +254,13 @@ export function Employees() {
     </Container>
   );
 }
+
+// Dependency Rule: Depende da camada de estado e outros componentes
 ```
 
-### 5. Polimento (1h)
+### 5. Integração e Polimento (1h)
 
+- Conectar camadas seguindo Dependency Rule
 - Estados de loading
 - Mensagens de erro
 - Responsividade
@@ -213,6 +269,7 @@ export function Employees() {
 ### 6. Documentação (30 min)
 
 - Atualizar README
+- Documentar arquitetura
 - Screenshots da interface
 
 ---
@@ -221,11 +278,11 @@ export function Employees() {
 
 | Etapa | Duração | Descrição |
 |-------|---------|-----------|
-| 1 | 30min | Setup inicial |
-| 2 | 30min | Tipos e utilitários |
-| 3 | 1h | API e estado |
-| 4 | 2h | Componentes |
-| 5 | 1h | Polimento |
+| 1 | 30min | Setup e arquitetura |
+| 2 | 30min | Domínio e tipos |
+| 3 | 1h | Camada de serviços |
+| 4 | 2h | Camada de apresentação |
+| 5 | 1h | Integração e polimento |
 | 6 | 30min | Documentação |
 
 **Total: 5-6 horas**
@@ -238,9 +295,29 @@ export function Employees() {
 - ✅ Pesquisa funciona (nome, cargo, telefone)
 - ✅ Layout responsivo (desktop/mobile)
 - ✅ Formatação de datas e telefones
-- ✅ Código limpo e bem estruturado
+- ✅ Código limpo e bem estruturado (SRP + Clean Code)
+- ✅ Arquitetura em camadas (Dependency Rule)
 - ✅ README completo
 
 ---
 
-*Plano simplificado focado no essencial.* 
+## 🏗️ Benefícios da Arquitetura
+
+### **Testabilidade**
+- Componentes UI podem ser testados isoladamente
+- Lógica de negócio independente de frameworks
+- Fácil mock de dependências
+
+### **Manutenibilidade**
+- Mudanças em uma camada não afetam outras
+- Código organizado e previsível
+- Responsabilidades bem definidas
+
+### **Escalabilidade**
+- Fácil adicionar novas funcionalidades
+- Reutilização de componentes
+- Arquitetura preparada para crescimento
+
+---
+
+*Plano focado em Clean Architecture e princípios de qualidade.* 

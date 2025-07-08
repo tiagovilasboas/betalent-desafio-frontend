@@ -2,7 +2,7 @@
 
 ## 📋 Visão Geral
 
-Roadmap simplificado para implementar a solução do [Teste Técnico Front-end da BeTalent](https://github.com/BeMobile/teste-pratico-frontend).
+Roadmap simplificado para implementar a solução do [Teste Técnico Front-end da BeTalent](https://github.com/BeMobile/teste-pratico-frontend), seguindo princípios de **Clean Architecture** e **Clean Code**.
 
 ### 🎯 Objetivos
 - Tabela responsiva de colaboradores
@@ -10,57 +10,89 @@ Roadmap simplificado para implementar a solução do [Teste Técnico Front-end d
 - Layout adaptativo (desktop/mobile)
 - Formatação de datas e telefones
 
+### 🏗️ Princípios Aplicados
+
+#### **SRP (Single Responsibility Principle)**
+- Cada componente tem uma única responsabilidade
+- Funções pequenas e focadas
+- Separação clara de responsabilidades
+
+#### **Clean Code**
+- Nomenclatura clara e descritiva
+- Funções pequenas e legíveis
+- Evitar duplicação de código
+- Código autoexplicativo
+
+#### **Dependency Rule (Clean Architecture)**
+- Dependências apontam do exterior para o interior
+- UI → Hooks → Services → API
+- Lógica de negócio independente de frameworks
+
 ---
 
 ## 🚀 Fases de Desenvolvimento
 
-### 1. Setup (30 min)
+### 1. Setup e Arquitetura (30 min)
 - [ ] Configurar API simulada (json-server)
 - [ ] Criar feature `employees` com Plop
+- [ ] Definir estrutura seguindo Dependency Rule
 - [ ] Testar conexão com API
 
-### 2. Tipos e Utilitários (30 min)
-- [ ] Definir interface `Employee`
-- [ ] Criar funções de formatação (data/telefone)
-- [ ] Implementar tipos para filtros
+### 2. Domínio e Tipos (30 min)
+- [ ] Definir interface `Employee` (domínio)
+- [ ] Criar funções de formatação (utilitários puros)
+- [ ] Implementar tipos para filtros (domínio)
+- [ ] Aplicar SRP: cada função tem uma responsabilidade
 
-### 3. API e Estado (1h)
-- [ ] Implementar `employeeApi.ts`
-- [ ] Criar store com Zustand
-- [ ] Implementar lógica de filtros
+### 3. Camada de Serviços (1h)
+- [ ] Implementar `employeeApi.ts` (camada externa)
+- [ ] Criar store com Zustand (camada de estado)
+- [ ] Implementar lógica de filtros (camada de domínio)
+- [ ] Seguir Dependency Rule: Services → API
 
-### 4. Componentes (2h)
-- [ ] Componente de pesquisa
-- [ ] Tabela de colaboradores (desktop)
-- [ ] Cards de colaboradores (mobile)
-- [ ] Componente principal responsivo
+### 4. Camada de Apresentação (2h)
+- [ ] Componente de pesquisa (UI pura)
+- [ ] Tabela de colaboradores (UI pura)
+- [ ] Cards de colaboradores (UI pura)
+- [ ] Componente principal (orquestrador)
+- [ ] Aplicar SRP: cada componente tem uma função
 
-### 5. Polimento (1h)
+### 5. Integração e Polimento (1h)
+- [ ] Conectar camadas seguindo Dependency Rule
 - [ ] Estados de loading e erro
 - [ ] Ajustes de responsividade
 - [ ] Testes básicos
 
 ### 6. Documentação (30 min)
 - [ ] Atualizar README
+- [ ] Documentar arquitetura
 - [ ] Screenshots da interface
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura Seguindo Clean Architecture
 
 ```
 src/features/employees/
-├── components/
-│   ├── EmployeeTable.tsx
-│   ├── EmployeeSearch.tsx
-│   ├── EmployeeCard.tsx
-│   └── Employees.tsx
-├── api/
-│   └── employeeApi.ts
-├── store/
-│   └── useEmployeesStore.ts
-└── types/
-    └── employee.ts
+├── components/           # Camada de Apresentação (UI)
+│   ├── EmployeeTable.tsx # Responsabilidade: exibir tabela
+│   ├── EmployeeSearch.tsx # Responsabilidade: capturar input
+│   ├── EmployeeCard.tsx  # Responsabilidade: exibir cards
+│   └── Employees.tsx     # Responsabilidade: orquestrar
+├── api/                  # Camada Externa (Infraestrutura)
+│   └── employeeApi.ts    # Responsabilidade: comunicação HTTP
+├── store/                # Camada de Estado
+│   └── useEmployeesStore.ts # Responsabilidade: gerenciar estado
+└── types/                # Camada de Domínio
+    └── employee.ts       # Responsabilidade: definir contratos
+```
+
+### 🔄 Fluxo de Dependências (Dependency Rule)
+
+```
+UI Components → Hooks/Store → Services → API
+     ↓              ↓           ↓        ↓
+  Apresentação → Aplicação → Domínio → Infraestrutura
 ```
 
 ---
@@ -68,11 +100,30 @@ src/features/employees/
 ## 🎯 Critérios de Avaliação
 
 ### ✅ Implementados
-- **Lógica de programação**: Código limpo e estruturado
-- **Organização**: Arquitetura em camadas
+- **Lógica de programação**: Código limpo e estruturado (SRP + Clean Code)
+- **Organização**: Arquitetura em camadas (Dependency Rule)
 - **CSS/Estilização**: Design responsivo
 - **README**: Documentação completa
 - **TypeScript**: Tipagem completa (diferencial)
+
+### 🏗️ Princípios de Qualidade
+
+#### **SRP - Single Responsibility**
+- [ ] Cada componente tem uma única responsabilidade
+- [ ] Funções pequenas e focadas
+- [ ] Separação clara entre UI, lógica e dados
+
+#### **Clean Code**
+- [ ] Nomes descritivos e claros
+- [ ] Funções pequenas (< 20 linhas)
+- [ ] Evitar duplicação de código
+- [ ] Código autoexplicativo
+
+#### **Dependency Rule**
+- [ ] UI não conhece implementação da API
+- [ ] Lógica de negócio independente de frameworks
+- [ ] Dependências apontam do exterior para o interior
+- [ ] Fácil de testar e manter
 
 ---
 
@@ -80,11 +131,11 @@ src/features/employees/
 
 | Fase | Duração | Descrição |
 |------|---------|-----------|
-| 1 | 30min | Setup inicial |
-| 2 | 30min | Tipos e utilitários |
-| 3 | 1h | API e estado |
-| 4 | 2h | Componentes |
-| 5 | 1h | Polimento |
+| 1 | 30min | Setup e arquitetura |
+| 2 | 30min | Domínio e tipos |
+| 3 | 1h | Camada de serviços |
+| 4 | 2h | Camada de apresentação |
+| 5 | 1h | Integração e polimento |
 | 6 | 30min | Documentação |
 
 **Total: 5-6 horas**
@@ -94,11 +145,20 @@ src/features/employees/
 ## 🚀 Próximos Passos
 
 1. Configurar API simulada
-2. Criar feature employees
-3. Implementar componentes básicos
-4. Adicionar responsividade
+2. Criar feature employees seguindo Clean Architecture
+3. Implementar componentes com SRP
+4. Conectar camadas seguindo Dependency Rule
 5. Testar e documentar
 
 ---
 
-*Roadmap simplificado focado no essencial do desafio.*
+## 📚 Referências de Arquitetura
+
+- **Clean Architecture**: Separação de responsabilidades
+- **SRP**: Cada módulo tem uma razão para mudar
+- **Dependency Rule**: Dependências apontam para o domínio
+- **Clean Code**: Código legível e manutenível
+
+---
+
+*Roadmap focado em Clean Architecture e princípios de qualidade.*
