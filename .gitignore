@@ -30,3 +30,5 @@ out.css
 
 # Design system assets
 design-system/
+
+tsconfig.tsbuildinfo
