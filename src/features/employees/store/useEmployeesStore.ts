@@ -5,34 +5,40 @@ import { create } from 'zustand';
 
 import { employeeRepository } from '../repository/EmployeeRepository';
 import type { Employee, EmployeeFilters, EmployeeState } from '../types/employee';
+import { sortData } from '../utils/sorting';
+
+export const ITEMS_PER_PAGE = 10;
 
 export const useEmployeesStore = create<EmployeeState>((set, get) => ({
   employees: [],
-  filteredEmployees: [],
+  processedEmployees: [],
   loading: false,
   error: null,
   filters: { search: '' },
+  sortKey: '',
+  sortOrder: 'asc',
+  currentPage: 1,
+  totalPages: 0,
 
-  // SRP: Responsabilidade única - buscar dados
   fetchEmployees: async () => {
     set({ loading: true, error: null });
-    
     try {
       const employees = await employeeRepository.getAll();
-      set({ 
-        employees, 
-        filteredEmployees: employees, 
-        loading: false 
+      set({
+        employees,
+        processedEmployees: employees,
+        loading: false,
+        totalPages: Math.ceil(employees.length / ITEMS_PER_PAGE),
+        currentPage: 1,
       });
     } catch (error) {
-      set({ 
+      set({
         error: error instanceof Error ? error.message : 'Erro desconhecido',
-        loading: false 
+        loading: false,
       });
     }
   },
 
-  // SRP: Responsabilidade única - criar colaborador
   createEmployee: async (employee: Omit<Employee, 'id'>) => {
     set({ loading: true, error: null });
     
@@ -43,7 +49,7 @@ export const useEmployeesStore = create<EmployeeState>((set, get) => ({
       
       set({ 
         employees: updatedEmployees, 
-        filteredEmployees: updatedEmployees,
+        processedEmployees: updatedEmployees,
         loading: false 
       });
       
@@ -57,7 +63,6 @@ export const useEmployeesStore = create<EmployeeState>((set, get) => ({
     }
   },
 
-  // SRP: Responsabilidade única - atualizar colaborador
   updateEmployee: async (id: number, employee: Partial<Employee>) => {
     set({ loading: true, error: null });
     
@@ -70,7 +75,7 @@ export const useEmployeesStore = create<EmployeeState>((set, get) => ({
       
       set({ 
         employees: updatedEmployees, 
-        filteredEmployees: updatedEmployees,
+        processedEmployees: updatedEmployees,
         loading: false 
       });
       
@@ -84,7 +89,6 @@ export const useEmployeesStore = create<EmployeeState>((set, get) => ({
     }
   },
 
-  // SRP: Responsabilidade única - deletar colaborador
   deleteEmployee: async (id: number) => {
     set({ loading: true, error: null });
     
@@ -95,7 +99,7 @@ export const useEmployeesStore = create<EmployeeState>((set, get) => ({
       
       set({ 
         employees: updatedEmployees, 
-        filteredEmployees: updatedEmployees,
+        processedEmployees: updatedEmployees,
         loading: false 
       });
     } catch (error) {
@@ -107,33 +111,60 @@ export const useEmployeesStore = create<EmployeeState>((set, get) => ({
     }
   },
 
-  // SRP: Responsabilidade única - filtrar dados
   setFilters: (filters: EmployeeFilters) => {
-    const { employees } = get();
-    
-    const filtered = employees.filter((employee: Employee) => {
-      const search = filters.search.toLowerCase();
-      return (
+    const { employees, sortKey, sortOrder } = get();
+    const search = filters.search.toLowerCase();
+
+    const filtered = employees.filter(
+      (employee) =>
         employee.name.toLowerCase().includes(search) ||
         employee.job.toLowerCase().includes(search) ||
-        employee.phone.includes(search)
-      );
+        employee.phone.includes(search),
+    );
+
+    const sorted = sortData(filtered, sortKey, sortOrder);
+
+    set({
+      filters,
+      processedEmployees: sorted,
+      totalPages: Math.ceil(sorted.length / ITEMS_PER_PAGE),
+      currentPage: 1,
     });
-    
-    set({ filters, filteredEmployees: filtered });
   },
 
-  // SRP: Responsabilidade única - limpar filtros
+  setSorting: (key: keyof Employee) => {
+    const { sortKey, sortOrder, processedEmployees } = get();
+    const newSortOrder = sortKey === key && sortOrder === 'asc' ? 'desc' : 'asc';
+    
+    const sortedEmployees = sortData(processedEmployees, key, newSortOrder);
+
+    set({
+      sortKey: key,
+      sortOrder: newSortOrder,
+      processedEmployees: sortedEmployees,
+      currentPage: 1,
+    });
+  },
+
+  setPage: (page: number) => {
+    set({ currentPage: page });
+  },
+
   clearFilters: () => {
     const { employees } = get();
-    set({ 
-      filters: { search: '' }, 
-      filteredEmployees: employees 
+    set({
+      filters: { search: '' },
+      processedEmployees: employees,
+      totalPages: Math.ceil(employees.length / ITEMS_PER_PAGE),
+      currentPage: 1,
     });
   },
 
-  // SRP: Responsabilidade única - limpar erro
   clearError: () => {
     set({ error: null });
-  }
-})); 
+  },
+}));
+
+// Seletor para obter os dados processados (filtrados e ordenados)
+export const selectProcessedEmployees = (state: EmployeeState) =>
+  state.processedEmployees; 
