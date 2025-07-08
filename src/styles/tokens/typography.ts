@@ -4,8 +4,8 @@
 export const typography = {
   // Famílias de fonte
   fontFamily: {
-    primary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    secondary: 'Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    primary: 'Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    secondary: 'Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     mono: 'SF Mono, Monaco, Inconsolata, "Roboto Mono", monospace',
   },
 
@@ -16,16 +16,13 @@ export const typography = {
     md: '16px',
     lg: '18px',
     xl: '20px',
-    xxl: '24px',
-    xxxl: '32px',
   },
 
   // Pesos de fonte
   fontWeight: {
     light: 300,
-    normal: 400,
+    regular: 400,
     medium: 500,
-    semibold: 600,
     bold: 700,
   },
 
@@ -34,66 +31,39 @@ export const typography = {
     tight: 1.2,
     normal: 1.4,
     relaxed: 1.6,
-    loose: 1.8,
   },
 
   // Espaçamentos de letra
   letterSpacing: {
-    tight: '-0.025em',
     normal: '0em',
-    wide: '0.025em',
-    wider: '0.05em',
   },
 
   // Variantes de texto
   variants: {
     h1: {
-      fontSize: '32px',
-      fontWeight: 700,
-      lineHeight: 1.2,
-      letterSpacing: '-0.025em',
+      fontFamily: 'Roboto, sans-serif',
+      fontSize: '20px',
+      fontWeight: 500, // Medium
     },
     h2: {
-      fontSize: '24px',
-      fontWeight: 600,
-      lineHeight: 1.3,
-      letterSpacing: '-0.025em',
+      fontFamily: 'Roboto, sans-serif',
+      fontSize: '16px',
+      fontWeight: 500, // Medium
     },
     h3: {
-      fontSize: '20px',
-      fontWeight: 600,
-      lineHeight: 1.4,
-      letterSpacing: '0em',
-    },
-    h4: {
-      fontSize: '18px',
-      fontWeight: 500,
-      lineHeight: 1.4,
-      letterSpacing: '0em',
+      fontFamily: 'Roboto, sans-serif',
+      fontSize: '16px',
+      fontWeight: 400, // Regular
     },
     body: {
+      fontFamily: 'Roboto, sans-serif',
       fontSize: '16px',
       fontWeight: 400,
-      lineHeight: 1.6,
-      letterSpacing: '0em',
-    },
-    bodySmall: {
-      fontSize: '14px',
-      fontWeight: 400,
-      lineHeight: 1.5,
-      letterSpacing: '0em',
-    },
-    caption: {
-      fontSize: '12px',
-      fontWeight: 400,
-      lineHeight: 1.4,
-      letterSpacing: '0.025em',
     },
     button: {
+      fontFamily: 'Roboto, sans-serif',
       fontSize: '14px',
       fontWeight: 500,
-      lineHeight: 1.4,
-      letterSpacing: '0.025em',
     },
   },
 } as const;

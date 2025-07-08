@@ -1,4 +1,4 @@
-import { MantineThemeOverride } from '@mantine/core';
+import { MantineTheme, MantineThemeOverride } from '@mantine/core';
 
 import { colors, shadows, spaces, typography } from './tokens';
 
@@ -6,33 +6,50 @@ export const theme: MantineThemeOverride = {
   // Cores do tema
   colors: {
     primary: [
-      colors.primary[50],
-      colors.primary[100],
-      colors.primary[200],
-      colors.primary[300],
-      colors.primary[400],
-      colors.primary[500], // Cor principal
-      colors.primary[600],
-      colors.primary[700],
-      colors.primary[800],
-      colors.primary[900],
+      colors.blue[10],
+      colors.blue[10],
+      colors.blue[10],
+      colors.blue[10],
+      colors.blue[10],
+      colors.blue.primary,
+      colors.blue.primary,
+      colors.blue.primary,
+      colors.blue.primary,
+      colors.blue.primary,
     ],
     gray: [
-      colors.neutral[50],
-      colors.neutral[100],
-      colors.neutral[200],
-      colors.neutral[300],
-      colors.neutral[400],
-      colors.neutral[500],
-      colors.neutral[600],
-      colors.neutral[700],
-      colors.neutral[800],
-      colors.neutral[900],
+      colors.neutral['00'],
+      colors.neutral['05'],
+      colors.neutral['10'],
+      colors.neutral['20'],
+      colors.neutral.black,
+      colors.neutral.black,
+      colors.neutral.black,
+      colors.neutral.black,
+      colors.neutral.black,
+      colors.neutral.black,
     ],
   },
 
   // Tipografia
   fontFamily: typography.fontFamily.primary,
+  headings: {
+    fontFamily: typography.fontFamily.primary,
+    sizes: {
+      h1: {
+        fontSize: typography.variants.h1.fontSize,
+        fontWeight: String(typography.variants.h1.fontWeight),
+      },
+      h2: {
+        fontSize: typography.variants.h2.fontSize,
+        fontWeight: String(typography.variants.h2.fontWeight),
+      },
+      h3: {
+        fontSize: typography.variants.h3.fontSize,
+        fontWeight: String(typography.variants.h3.fontWeight),
+      },
+    },
+  },
   fontSizes: {
     xs: typography.fontSize.xs,
     sm: typography.fontSize.sm,
@@ -82,17 +99,15 @@ export const theme: MantineThemeOverride = {
       },
     },
     TextInput: {
-      defaultProps: {
-        radius: 'md',
-      },
-      styles: {
+      styles: (theme: MantineTheme) => ({
         input: {
-          boxShadow: shadows.component.input,
+          backgroundColor: theme.white,
+          borderColor: theme.colors.gray[2], // neutral['10']
           '&:focus': {
-            boxShadow: shadows.focus,
+            borderColor: theme.colors.primary[6],
           },
         },
-      },
+      }),
     },
     Table: {
       styles: {
@@ -100,7 +115,7 @@ export const theme: MantineThemeOverride = {
           boxShadow: shadows.component.table,
         },
         th: {
-          fontWeight: typography.fontWeight.semibold,
+          fontWeight: typography.fontWeight.medium,
           padding: spaces.component.table.cellPadding,
         },
         td: {
