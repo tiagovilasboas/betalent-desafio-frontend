@@ -14,17 +14,19 @@ export function EmployeeSearch() {
 
   return (
     <TextInput
-      placeholder="Buscar colaboradores..."
+      placeholder="Buscar colaboradores"
       value={filters.search}
       onChange={(event) => handleSearchChange(event.currentTarget.value)}
       leftSection={<IconSearch size={16} />}
-      size="md"
+      size="lg"
       radius="md"
       styles={{
         input: {
           border: '1px solid #e9ecef',
+          fontSize: '16px',
           '&:focus': {
-            borderColor: '#0500FF',
+            borderColor: '#9747FF',
+            boxShadow: '0 0 0 2px rgba(151, 71, 255, 0.2)',
           },
         },
       }}
