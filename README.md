@@ -38,25 +38,13 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
    npm install
    ```
 
-3. **Configure a API simulada**:
-   ```bash
-   # Instale o json-server globalmente
-   npm install -g json-server
-   
-   # Clone o repositório de dados da BeTalent
-   git clone https://github.com/BeMobile/teste-pratico-frontend
-   cd teste-pratico-frontend
-   
-   # Execute a API simulada
-   json-server --watch db.json --port 3001
-   ```
-
-4. **Execute a aplicação** (em outro terminal):
+3. **Execute a aplicação e a API simulada**:
+   O projeto utiliza o `concurrently` para iniciar o servidor de desenvolvimento do Vite e o `json-server` simultaneamente.
    ```bash
    npm run dev
    ```
 
-5. **Acesse a aplicação**: http://localhost:5173
+4. **Acesse a aplicação**: http://localhost:5173
 
 ## 🎨 Funcionalidades
 
@@ -77,13 +65,6 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 - Responsividade completa
 - Estados visuais adequados
 - Acessibilidade implementada
-
-## 🎨 Design System
-
-A pasta `design-system/` contém todos os SVGs e assets visuais fornecidos para o desafio. Utilize esses arquivos para garantir que a interface siga o visual proposto no Figma e nos requisitos do teste.
-
-- Exemplos de arquivos: colors.svg, icons.svg, logo.svg, table.svg, etc.
-- Recomenda-se importar os SVGs diretamente nos componentes ou usá-los como referência para estilos.
 
 ## 🛠️ Tecnologias Utilizadas
 
