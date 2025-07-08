@@ -10,6 +10,8 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
 
+import { LanguageSwitcher } from './components/LanguageSwitcher';
+
 export function AppLayout() {
   const [opened, { toggle }] = useDisclosure();
   const theme = useMantineTheme();
@@ -20,9 +22,12 @@ export function AppLayout() {
         withBorder={false}
         style={{ boxShadow: theme.shadows.sm }}
       >
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Image src="/logo.svg" alt="BeTalent Logo" h={30} w="auto" />
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            <Image src="/logo.svg" alt="BeTalent Logo" h={30} w="auto" />
+          </Group>
+          <LanguageSwitcher />
         </Group>
       </AppShell.Header>
 
