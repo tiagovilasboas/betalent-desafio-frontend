@@ -1,7 +1,9 @@
-import { Button, Group, Stack, TextInput } from '@mantine/core'
-import { useForm, zodResolver } from '@mantine/form'
-import { useTranslation } from 'react-i18next'
-import { z } from 'zod'
+import { Group, Stack, TextInput } from '@mantine/core';
+import { useForm, zodResolver } from '@mantine/form';
+import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
+
+import { Button } from '../../../../../design-system/components/Button';
 
 const schema = z.object({
   name: z.string().nonempty('validation.required'),
