@@ -19,10 +19,10 @@ As prioridades são: **Qualidade**, **Performance em Escala**, **Resiliência** 
     -   **Por quê:** Para simular a jornada real do usuário no navegador, garantindo que o fluxo principal (pesquisa, ordenação, paginação) funcione de ponta a ponta sem quebras.
     -   **Primeiro passo:** Criar um teste que carrega a página e valida a renderização da tabela.
 
--   [ ] **Estruturar Pipeline de CI/CD com GitHub Actions**
-    -   **O quê:** Criar um workflow (`.github/workflows`) que roda a cada Pull Request.
-    -   **Por quê:** Para automatizar a verificação de qualidade (lint, testes), garantindo que código com problemas não seja integrado à `main` e melhorando a confiança nos deploys.
-    -   **Primeiro passo:** Configurar um job que executa `npm install` e `npm run test`.
+-   [ ] **Configurar CI/CD com Deploy Contínuo na Vercel**
+    -   **O quê:** Integrar o repositório do GitHub com a **Vercel** e configurar um pipeline de CI no **GitHub Actions**.
+    -   **Por quê:** Para automatizar o processo de build, teste e deploy. A Vercel gerará um "Preview Deployment" para cada Pull Request, permitindo a revisão da funcionalidade em um ambiente real antes do merge. Após o merge na `main`, um deploy para produção será feito automaticamente.
+    -   **Primeiro passo:** Conectar o repositório à Vercel para habilitar o deploy automático a cada push na `main`.
 
 -   [ ] **Abstrair a Camada de API**
     -   **O quê:** Refatorar as chamadas `fetch` para um cliente de API centralizado (ex: um módulo `apiClient.ts`).
