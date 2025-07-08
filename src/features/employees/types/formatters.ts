@@ -15,7 +15,14 @@ export const formatDate = (dateString: string): string => {
  */
 export const formatPhone = (phone: string): string => {
   const cleaned = phone.replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+
+  // Remove o código do país (55) se ele existir e o número tiver 13 dígitos
+  const sanitized =
+    cleaned.startsWith('55') && cleaned.length === 13
+      ? cleaned.slice(2)
+      : cleaned;
+
+  const match = sanitized.match(/^(\d{2})(\d{5})(\d{4})$/);
   return match ? `(${match[1]}) ${match[2]}-${match[3]}` : phone;
 };
 

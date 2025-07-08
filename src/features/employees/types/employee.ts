@@ -16,21 +16,27 @@ export interface EmployeeFilters {
 // SRP: Interface para estado da aplicação
 export interface EmployeeState {
   employees: Employee[];
-  filteredEmployees: Employee[];
+  processedEmployees: Employee[];
   loading: boolean;
   error: string | null;
   filters: EmployeeFilters;
-  
+  sortKey: keyof Employee | '';
+  sortOrder: 'asc' | 'desc';
+  currentPage: number;
+  totalPages: number;
+
   // Métodos de leitura
   fetchEmployees: () => Promise<void>;
-  
+
   // Métodos de escrita
   createEmployee: (employee: Omit<Employee, 'id'>) => Promise<Employee>;
   updateEmployee: (id: number, employee: Partial<Employee>) => Promise<Employee>;
   deleteEmployee: (id: number) => Promise<void>;
-  
-  // Métodos de filtro
+
+  // Métodos de filtro e ordenação
   setFilters: (filters: EmployeeFilters) => void;
   clearFilters: () => void;
+  setSorting: (key: keyof Employee) => void;
+  setPage: (page: number) => void;
   clearError: () => void;
 } 
