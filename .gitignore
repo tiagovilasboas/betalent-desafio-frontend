@@ -27,3 +27,6 @@ dist-ssr
 .unlighthouse
 stats.html
 out.css
+
+# Design system assets
+design-system/

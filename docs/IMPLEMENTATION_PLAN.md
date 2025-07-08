@@ -321,3 +321,7 @@ export function Employees() {
 ---
 
 *Plano focado em Clean Architecture e princípios de qualidade.* 
+
+## 🎨 Design System
+
+A pasta `design-system/` contém todos os SVGs e assets visuais fornecidos para o desafio. Utilize esses arquivos para garantir que a interface siga o visual proposto no Figma e nos requisitos do teste. 

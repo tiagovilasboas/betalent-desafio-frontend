@@ -9,7 +9,6 @@
   - [ ] Testar endpoint da API
 
 - [ ] **Preparar estrutura do projeto**
-  - [ ] Usar gerador Plop para criar feature employees
   - [ ] Verificar estrutura seguindo Clean Architecture
   - [ ] Definir camadas: UI → Estado → Serviços → API
 

@@ -34,7 +34,6 @@ Roadmap simplificado para implementar a solução do [Teste Técnico Front-end d
 
 ### 1. Setup e Arquitetura (30 min)
 - [ ] Configurar API simulada (json-server)
-- [ ] Criar feature `employees` com Plop
 - [ ] Definir estrutura seguindo Dependency Rule
 - [ ] Testar conexão com API
 
@@ -162,3 +161,7 @@ UI Components → Hooks/Store → Services → API
 ---
 
 *Roadmap focado em Clean Architecture e princípios de qualidade.*
+
+## 🎨 Design System
+
+A pasta `design-system/` contém os SVGs e assets visuais do desafio. Utilize esses arquivos para garantir que a interface siga o visual proposto.

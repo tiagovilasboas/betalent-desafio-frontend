@@ -78,6 +78,13 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 - Estados visuais adequados
 - Acessibilidade implementada
 
+## 🎨 Design System
+
+A pasta `design-system/` contém todos os SVGs e assets visuais fornecidos para o desafio. Utilize esses arquivos para garantir que a interface siga o visual proposto no Figma e nos requisitos do teste.
+
+- Exemplos de arquivos: colors.svg, icons.svg, logo.svg, table.svg, etc.
+- Recomenda-se importar os SVGs diretamente nos componentes ou usá-los como referência para estilos.
+
 ## 🛠️ Tecnologias Utilizadas
 
 Este projeto foi desenvolvido utilizando o [React + Vite Boilerplate](https://github.com/tiagovilasboas/react-vite-boilerplate) como base, que fornece:
