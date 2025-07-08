@@ -9,7 +9,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: () => import('@/features/greeter/components/Greeting'),
+        lazy: () => import('@/features/employees/components/Employees'),
       },
       {
         path: '/about',

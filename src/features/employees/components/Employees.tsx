@@ -29,4 +29,6 @@ export function Employees() {
       )}
     </Container>
   );
-} 
+}
+
+export default Employees; 
