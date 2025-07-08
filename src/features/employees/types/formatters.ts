@@ -25,4 +25,15 @@ export const formatPhone = (phone: string): string => {
  */
 export const formatJob = (job: string): string => {
   return job.charAt(0).toUpperCase() + job.slice(1).toLowerCase();
+};
+
+/**
+ * Formata valor monetário para o padrão brasileiro
+ * SRP: Responsabilidade única - formatar moeda
+ */
+export const formatCurrency = (value: number): string => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(value);
 }; 

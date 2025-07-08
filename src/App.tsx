@@ -1,38 +1,15 @@
-import { Suspense } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Link, Outlet } from 'react-router-dom'
+import { MantineProvider } from '@mantine/core';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './app/router';
+import { theme } from './styles/theme';
+import './index.css';
 
 function App() {
-  const { t } = useTranslation()
   return (
-    <div className="app">
-      <header className="header">
-        <Link
-          to="/"
-          style={{
-            textDecoration: 'none',
-            color: 'inherit',
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-          }}
-        >
-          {t('brand')}
-        </Link>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <Link to="/">{t('nav.home')}</Link>
-          <Link to="/about">{t('nav.about')}</Link>
-        </nav>
-      </header>
-      <main className="main-content">
-        <Suspense fallback={<div>{t('loading')}</div>}>
-          <Outlet />
-        </Suspense>
-      </main>
-      <footer className="footer">
-        <p>{t('footer.madeBy', { author: 'Tiago Vilas Boas' })}</p>
-      </footer>
-    </div>
-  )
+    <MantineProvider theme={theme}>
+      <RouterProvider router={router} />
+    </MantineProvider>
+  );
 }
 
-export default App
+export default App;

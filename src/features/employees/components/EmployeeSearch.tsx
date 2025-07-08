@@ -3,26 +3,31 @@
 
 import { TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
-
 import { useEmployeesStore } from '../store/useEmployeesStore';
 
 export function EmployeeSearch() {
   const { filters, setFilters } = useEmployeesStore();
-  
-  // SRP: Responsabilidade única - capturar input do usuário
+
   const handleSearchChange = (value: string) => {
     setFilters({ ...filters, search: value });
   };
 
   return (
     <TextInput
-      placeholder="Pesquisar por nome, cargo ou telefone..."
+      placeholder="Buscar colaboradores..."
       value={filters.search}
-      onChange={(e) => handleSearchChange(e.target.value)}
+      onChange={(event) => handleSearchChange(event.currentTarget.value)}
       leftSection={<IconSearch size={16} />}
       size="md"
       radius="md"
-      style={{ marginBottom: '1rem' }}
+      styles={{
+        input: {
+          border: '1px solid #e9ecef',
+          '&:focus': {
+            borderColor: '#0500FF',
+          },
+        },
+      }}
     />
   );
 } 
