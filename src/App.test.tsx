@@ -1,4 +1,3 @@
-/* eslint-disable formatjs/no-literal-string-in-jsx */
 import '@testing-library/jest-dom'
 
 import { MantineProvider } from '@mantine/core'

@@ -1,8 +1,10 @@
+import './index.css';
+
 import { MantineProvider } from '@mantine/core';
 import { RouterProvider } from 'react-router-dom';
+
 import { router } from './app/router';
 import { theme } from './styles/theme';
-import './index.css';
 
 function App() {
   return (
