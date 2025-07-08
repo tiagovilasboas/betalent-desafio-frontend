@@ -18,5 +18,38 @@
   "validation": {
     "required": "Field required",
     "invalidEmail": "Invalid email"
+  },
+  "employees": {
+    "title": "Employees",
+    "error": {
+      "title": "An error occurred while loading employees.",
+      "message": "Please try again later."
+    },
+    "empty": {
+      "title": "No employees found.",
+      "message": "Try adjusting your search or clearing the filters."
+    },
+    "mobileHeader": {
+      "photo": "PHOTO",
+      "name": "NAME"
+    },
+    "search": {
+      "placeholder": "Search",
+      "alt": "Search icon"
+    },
+    "table": {
+      "header": {
+        "photo": "PHOTO",
+        "name": "NAME",
+        "job": "JOB",
+        "admissionDate": "ADMISSION DATE",
+        "phone": "PHONE"
+      }
+    },
+    "card": {
+      "job": "Job:",
+      "admissionDate": "Admission Date:",
+      "phone": "Phone:"
+    }
   }
 }

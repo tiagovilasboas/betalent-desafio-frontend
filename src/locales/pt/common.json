@@ -18,5 +18,38 @@
   "validation": {
     "required": "Campo obrigatório",
     "invalidEmail": "Email inválido"
+  },
+  "employees": {
+    "title": "Funcionários",
+    "error": {
+      "title": "Ocorreu um erro ao carregar os funcionários.",
+      "message": "Tente novamente mais tarde."
+    },
+    "empty": {
+      "title": "Nenhum funcionário encontrado.",
+      "message": "Tente ajustar sua busca ou limpar os filtros."
+    },
+    "mobileHeader": {
+      "photo": "FOTO",
+      "name": "NOME"
+    },
+    "search": {
+      "placeholder": "Pesquisar",
+      "alt": "Ícone de busca"
+    },
+    "table": {
+      "header": {
+        "photo": "FOTO",
+        "name": "NOME",
+        "job": "CARGO",
+        "admissionDate": "DATA DE ADMISSÃO",
+        "phone": "TELEFONE"
+      }
+    },
+    "card": {
+      "job": "Cargo:",
+      "admissionDate": "Data de Admissão:",
+      "phone": "Telefone:"
+    }
   }
 }

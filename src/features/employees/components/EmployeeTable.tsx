@@ -1,4 +1,5 @@
 import { Avatar, Table, Text, useMantineTheme } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 
 import { Employee } from '../types/employee';
 import { formatDate, formatPhone } from '../types/formatters';
@@ -10,6 +11,7 @@ interface EmployeeTableProps {
 
 export function EmployeeTable({ employees }: EmployeeTableProps) {
   const theme = useMantineTheme();
+  const { t } = useTranslation('common');
 
   const rows = employees.map((employee) => (
     <Table.Tr key={employee.id}>
@@ -59,22 +61,28 @@ export function EmployeeTable({ employees }: EmployeeTableProps) {
           <Table.Th
             style={{ color: 'inherit', paddingLeft: theme.spacing.xl }}
           >
-            <Text fw={500}>FOTO</Text>
-          </Table.Th>
-          <Table.Th style={{ color: 'inherit' }}>
-            <SortableHeader label="NOME" sortKey="name" />
-          </Table.Th>
-          <Table.Th style={{ color: 'inherit' }}>
-            <SortableHeader label="CARGO" sortKey="job" />
+            <Text fw={500}>{t('employees.table.header.photo')}</Text>
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
             <SortableHeader
-              label="DATA DE ADMISSÃO"
+              label={t('employees.table.header.name')}
+              sortKey="name"
+            />
+          </Table.Th>
+          <Table.Th style={{ color: 'inherit' }}>
+            <SortableHeader
+              label={t('employees.table.header.job')}
+              sortKey="job"
+            />
+          </Table.Th>
+          <Table.Th style={{ color: 'inherit' }}>
+            <SortableHeader
+              label={t('employees.table.header.admissionDate')}
               sortKey="admission_date"
             />
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
-            <Text fw={500}>TELEFONE</Text>
+            <Text fw={500}>{t('employees.table.header.phone')}</Text>
           </Table.Th>
         </Table.Tr>
       </Table.Thead>

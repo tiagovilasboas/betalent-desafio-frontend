@@ -8,6 +8,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons-react';
+import { useTranslation } from 'react-i18next';
 
 import { Employee } from '../types/employee';
 import { formatDate, formatPhone } from '../types/formatters';
@@ -18,6 +19,7 @@ interface EmployeeCardProps {
 
 export function EmployeeCard({ employee }: EmployeeCardProps) {
   const theme = useMantineTheme();
+  const { t } = useTranslation('common');
   return (
     <Accordion
       chevron={
@@ -48,14 +50,15 @@ export function EmployeeCard({ employee }: EmployeeCardProps) {
         <Accordion.Panel>
           <Stack pl={rem(48)} gap="xs">
             <Text>
-              <strong>Cargo:</strong> {employee.job}
+              <strong>{t('employees.card.job')}</strong> {employee.job}
             </Text>
             <Text>
-              <strong>Data de Admissão:</strong>{' '}
+              <strong>{t('employees.card.admissionDate')}</strong>{' '}
               {formatDate(employee.admission_date)}
             </Text>
             <Text>
-              <strong>Telefone:</strong> {formatPhone(employee.phone)}
+              <strong>{t('employees.card.phone')}</strong>{' '}
+              {formatPhone(employee.phone)}
             </Text>
           </Stack>
         </Accordion.Panel>

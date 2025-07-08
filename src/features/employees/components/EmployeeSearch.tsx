@@ -3,6 +3,7 @@
 
 import { TextInput } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import SearchIconUrl from '../../../assets/icon-search.svg';
 import { useEmployeesStore } from '../store/useEmployeesStore';
@@ -10,6 +11,7 @@ import { useEmployeesStore } from '../store/useEmployeesStore';
 export function EmployeeSearch() {
   const { filters, setFilters } = useEmployeesStore();
   const [searchValue, setSearchValue] = useState(filters.search);
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -27,11 +29,16 @@ export function EmployeeSearch() {
 
   return (
     <TextInput
-      placeholder="Pesquisar"
+      placeholder={t('employees.search.placeholder')}
       value={searchValue}
       onChange={handleSearchChange}
       rightSection={
-        <img src={SearchIconUrl} alt="Search" width={20} height={20} />
+        <img
+          src={SearchIconUrl}
+          alt={t('employees.search.alt')}
+          width={20}
+          height={20}
+        />
       }
       rightSectionProps={{ style: { paddingRight: '12px' } }}
       radius="md"

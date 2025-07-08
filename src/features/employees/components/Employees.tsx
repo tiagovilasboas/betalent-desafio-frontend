@@ -11,6 +11,7 @@ import {
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { Fragment, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   selectProcessedEmployees,
@@ -27,6 +28,7 @@ export default function Employees() {
   const processedEmployees = useEmployeesStore(selectProcessedEmployees);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const theme = useMantineTheme();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     fetchEmployees();
@@ -48,7 +50,7 @@ export default function Employees() {
   return (
     <Fragment>
       <Group justify="space-between" align="center">
-        <Title order={1}>Funcionários</Title>
+        <Title order={1}>{t('employees.title')}</Title>
         <EmployeeSearch />
       </Group>
 
@@ -58,16 +60,14 @@ export default function Employees() {
         ) : error ? (
           <Box p="xl" style={{ textAlign: 'center' }}>
             <Text c="red" size="lg">
-              Ocorreu um erro ao carregar os funcionários.
+              {t('employees.error.title')}
             </Text>
-            <Text c="dimmed">Tente novamente mais tarde.</Text>
+            <Text c="dimmed">{t('employees.error.message')}</Text>
           </Box>
         ) : paginatedEmployees.length === 0 ? (
           <Box p="xl" style={{ textAlign: 'center' }}>
-            <Text size="lg">Nenhum funcionário encontrado.</Text>
-            <Text c="dimmed">
-              Tente ajustar sua busca ou limpar os filtros.
-            </Text>
+            <Text size="lg">{t('employees.empty.title')}</Text>
+            <Text c="dimmed">{t('employees.empty.message')}</Text>
           </Box>
         ) : isMobile ? (
           <Stack gap={0}>
@@ -80,10 +80,10 @@ export default function Employees() {
             >
               <Group px="md" py="sm" align="center">
                 <Text w={rem(38)} ta="left" size="sm" fw={500}>
-                  FOTO
+                  {t('employees.mobileHeader.photo')}
                 </Text>
                 <Text size="sm" fw={500}>
-                  NOME
+                  {t('employees.mobileHeader.name')}
                 </Text>
               </Group>
             </Box>
