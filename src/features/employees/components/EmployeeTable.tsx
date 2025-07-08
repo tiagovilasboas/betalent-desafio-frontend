@@ -1,16 +1,20 @@
 import { Avatar, Table, Text, useMantineTheme } from '@mantine/core';
 
-import { useEmployeesStore } from '../store/useEmployeesStore';
+import { Employee } from '../types/employee';
 import { formatDate, formatPhone } from '../types/formatters';
+import { SortableHeader } from './SortableHeader';
 
-export function EmployeeTable() {
-  const { filteredEmployees } = useEmployeesStore();
+interface EmployeeTableProps {
+  employees: Employee[];
+}
+
+export function EmployeeTable({ employees }: EmployeeTableProps) {
   const theme = useMantineTheme();
 
-  const rows = filteredEmployees.map((employee) => (
+  const rows = employees.map((employee) => (
     <Table.Tr key={employee.id}>
-      <Table.Td>
-        <Avatar src={employee.image} alt={employee.name} radius="xl" />
+      <Table.Td style={{ paddingLeft: theme.spacing.xl }}>
+        <Avatar src={employee.image} alt={employee.name} radius="50%" />
       </Table.Td>
       <Table.Td>
         <Text fw={500}>{employee.name}</Text>
@@ -28,19 +32,50 @@ export function EmployeeTable() {
   ));
 
   return (
-    <Table verticalSpacing="md">
-      <Table.Thead>
-        <Table.Tr
-          style={{
-            backgroundColor: theme.colors.primary[500],
-            color: 'white',
-          }}
-        >
-          <Table.Th style={{ color: 'inherit' }}>Foto</Table.Th>
-          <Table.Th style={{ color: 'inherit' }}>Nome</Table.Th>
-          <Table.Th style={{ color: 'inherit' }}>Cargo</Table.Th>
-          <Table.Th style={{ color: 'inherit' }}>Data de Admissão</Table.Th>
-          <Table.Th style={{ color: 'inherit' }}>Telefone</Table.Th>
+    <Table
+      highlightOnHover
+      style={{
+        borderRadius: theme.radius.md,
+        overflow: 'hidden',
+        width: '100%',
+      }}
+      styles={(theme) => ({
+        tr: {
+          borderBottom: `1px solid ${theme.colors.gray[2]}`,
+        },
+        td: {
+          paddingTop: '4px',
+          paddingBottom: '4px',
+        },
+      })}
+    >
+      <Table.Thead
+        style={{
+          backgroundColor: theme.colors.primary[6],
+          color: 'white',
+        }}
+      >
+        <Table.Tr>
+          <Table.Th
+            style={{ color: 'inherit', paddingLeft: theme.spacing.xl }}
+          >
+            <Text fw={500}>FOTO</Text>
+          </Table.Th>
+          <Table.Th style={{ color: 'inherit' }}>
+            <SortableHeader label="NOME" sortKey="name" />
+          </Table.Th>
+          <Table.Th style={{ color: 'inherit' }}>
+            <SortableHeader label="CARGO" sortKey="job" />
+          </Table.Th>
+          <Table.Th style={{ color: 'inherit' }}>
+            <SortableHeader
+              label="DATA DE ADMISSÃO"
+              sortKey="admission_date"
+            />
+          </Table.Th>
+          <Table.Th style={{ color: 'inherit' }}>
+            <Text fw={500}>TELEFONE</Text>
+          </Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
