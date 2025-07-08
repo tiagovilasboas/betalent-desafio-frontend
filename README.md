@@ -16,6 +16,7 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 - ✅ **Layout Responsivo**: Desktop e mobile
 - ✅ **API Simulada**: Integração com json-server
 - ✅ **Tecnologias**: React.js com TypeScript (diferencial)
+- ✅ **Suporte a múltiplos idiomas (PT-BR/EN)**: Detecção automática e seletor manual
 
 ## 🚀 Como Executar
 
