@@ -72,9 +72,9 @@ Além dos requisitos básicos, o projeto foi desenvolvido com foco em qualidade 
 
 ### Arquitetura e Código Limpo
 
-- **Arquitetura em Camadas**: A estrutura do projeto (`features`, `components`, `api`, `store`) isola responsabilidades, seguindo a **Dependency Rule** e facilitando a manutenção e escalabilidade futura.
-- **Princípios S.O.L.I.D.**: O código foi escrito seguindo o **Princípio da Responsabilidade Única (SRP)**. Componentes e funções são focados em uma única tarefa (ex: `useEmployeesStore` para estado, `formatters` para formatação, `SortableHeader` para ordenação).
-- **Clean Code**: Adoção de nomes claros para variáveis e funções, baixo aninhamento e complexidade, visando a legibilidade e a simplicidade do código.
+- **Arquitetura em Camadas**: A estrutura do projeto (`pages`, `features`, `components`, `api`, `store`) isola responsabilidades, seguindo a **Dependency Rule** e facilitando a manutenção e escalabilidade futura.
+- **Princípios S.O.L.I.D.**: O código foi escrito seguindo o **Princípio da Responsabilidade Única (SRP)**. Componentes e funções são focados em uma única tarefa (ex: `HomePage` para a rota, `Employees` para a feature, `useEmployeesStore` para o estado).
+- **Clean Code**: Adoção de nomes claros para variáveis e funções, baixo aninhamento e complexidade de código, e uso de componentes pequenos e focados.
 
 ### Performance e Experiência do Usuário (UX)
 
