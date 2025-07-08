@@ -66,6 +66,30 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 - Estados visuais adequados
 - Acessibilidade implementada
 
+## ✨ Diferenciais e Boas Práticas Adotadas
+
+Além dos requisitos básicos, o projeto foi desenvolvido com foco em qualidade de código, performance e manutenibilidade, aplicando práticas modernas de engenharia de software.
+
+### Arquitetura e Código Limpo
+
+- **Arquitetura em Camadas**: A estrutura do projeto (`features`, `components`, `api`, `store`) isola responsabilidades, seguindo a **Dependency Rule** e facilitando a manutenção e escalabilidade futura.
+- **Princípios S.O.L.I.D.**: O código foi escrito seguindo o **Princípio da Responsabilidade Única (SRP)**. Componentes e funções são focados em uma única tarefa (ex: `useEmployeesStore` para estado, `formatters` para formatação, `SortableHeader` para ordenação).
+- **Clean Code**: Adoção de nomes claros para variáveis e funções, baixo aninhamento e complexidade, visando a legibilidade e a simplicidade do código.
+
+### Performance e Experiência do Usuário (UX)
+
+- **Debounce na Busca**: Para otimizar a performance, a função de busca aguarda 300ms após o usuário parar de digitar para realizar a filtragem, evitando re-renderizações excessivas e melhorando a fluidez da interação.
+- **Estados de Interface (UI States)**: A aplicação fornece feedback visual claro para diferentes cenários, incluindo um **skeleton loader** durante o carregamento dos dados, uma mensagem para quando a busca não retorna resultados e um alerta em caso de erro na API.
+- **Paginação**: Os dados são paginados para melhorar a performance e a usabilidade, especialmente ao lidar com grandes volumes de registros.
+- **Ordenação de Colunas**: A tabela de funcionários permite a ordenação dinâmica por nome, cargo e data de admissão, facilitando a análise dos dados pelo usuário.
+
+### Desenvolvimento e Manutenção (DX)
+
+- **Gerenciamento de Estado Centralizado**: Utilização do **Zustand** para um gerenciamento de estado global simples, eficiente e desacoplado da UI, facilitando o rastreamento e a modificação do estado da aplicação.
+- **Scripts Otimizados**: O script `npm run dev` utiliza `concurrently` e `kill-port` para gerenciar os processos da API e do front-end com um único comando, garantindo que as portas sejam liberadas automaticamente para evitar conflitos (`EADDRINUSE`).
+- **Commits Semânticos**: O histórico de commits segue o padrão **Conventional Commits**, o que torna o histórico mais legível, facilita a revisão do código e permite a automação de changelogs.
+- **Design System com Mantine**: O projeto utiliza o **Mantine** como base para a UI, com um `theme.ts` centralizado que exporta tokens de design (cores, tipografia, etc.), garantindo consistência visual e agilidade no desenvolvimento.
+
 ## 🛠️ Tecnologias Utilizadas
 
 Este projeto foi desenvolvido utilizando o [React + Vite Boilerplate](https://github.com/tiagovilasboas/react-vite-boilerplate) como base, que fornece:
