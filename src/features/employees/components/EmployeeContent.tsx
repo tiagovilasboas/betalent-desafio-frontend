@@ -5,11 +5,9 @@ import { Employee } from '../types/employee';
 import { ApiError } from './ApiError';
 import { EmployeeCard } from './EmployeeCard';
 import { EmployeeTable } from './EmployeeTable';
-import EmployeeTableSkeleton from './EmployeeTableSkeleton';
 import { NoResults } from './NoResults';
 
 interface EmployeeContentProps {
-  loading: boolean;
   apiError: string | null;
   employees: Employee[];
   searchTerm: string;
@@ -22,7 +20,6 @@ interface EmployeeContentProps {
 }
 
 export function EmployeeContent({
-  loading,
   apiError,
   employees,
   searchTerm,
@@ -31,10 +28,6 @@ export function EmployeeContent({
   onRetry,
 }: EmployeeContentProps) {
   const isMobile = useMediaQuery('(max-width: 768px)');
-
-  if (loading) {
-    return <EmployeeTableSkeleton />;
-  }
 
   if (apiError) {
     return <ApiError message={apiError} onRetry={onRetry} />;
