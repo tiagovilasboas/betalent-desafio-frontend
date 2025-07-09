@@ -208,6 +208,26 @@ npm run test:watch
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
+## 📊 Análise de Performance (Lighthouse)
+
+A performance da aplicação foi auditada utilizando o Google Lighthouse, simulando um ambiente de produção. Os resultados abaixo refletem a qualidade da aplicação em termos de performance, acessibilidade, melhores práticas e SEO.
+
+| Métrica                 | Pontuação |
+| ----------------------- | :-------: |
+| 🟢 Performance          | `100 / 100` |
+| 🟢 Acessibilidade       | `100 / 100` |
+| 🟢 Melhores Práticas    | `100 / 100` |
+| 🟢 SEO                  | `100 / 100` |
+
+### Core Web Vitals
+
+| Métrica                       | Resultado | Avaliação |
+| ----------------------------- | :-------: | :---------: |
+| Largest Contentful Paint (LCP)| `0.6s`    |   🟢 Bom    |
+| Interaction to Next Paint (INP)| `10ms`    |   🟢 Bom    |
+| Cumulative Layout Shift (CLS) | `0`       |   🟢 Bom    |
+
+
 ## 👨‍💻 Autor
 
 **Tiago Vilas Boas**
