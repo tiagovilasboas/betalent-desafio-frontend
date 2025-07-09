@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useEmployeesView } from '../hooks/useEmployeesView';
 import { EmployeeContent } from './EmployeeContent';
 import { EmployeeSearch } from './EmployeeSearch';
+import EmployeeTableSkeleton from './EmployeeTableSkeleton';
 
 export default function Employees() {
   const {
@@ -48,15 +49,18 @@ export default function Employees() {
       )}
 
       <Card radius="md" shadow="md" p={0}>
-        <EmployeeContent
-          loading={loading}
-          apiError={apiError}
-          employees={paginatedEmployees}
-          searchTerm={searchTerm}
-          sortConfig={sortConfig}
-          onSort={handleSort}
-          onRetry={fetchEmployees}
-        />
+        {loading ? (
+          <EmployeeTableSkeleton />
+        ) : (
+          <EmployeeContent
+            apiError={apiError}
+            employees={paginatedEmployees}
+            searchTerm={searchTerm}
+            sortConfig={sortConfig}
+            onSort={handleSort}
+            onRetry={fetchEmployees}
+          />
+        )}
       </Card>
 
       {totalPages > 1 && (
