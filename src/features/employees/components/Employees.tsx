@@ -2,8 +2,11 @@ import {
   Card,
   Group,
   Pagination,
+  Stack,
   Title,
+  useMantineTheme,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -27,13 +30,22 @@ export default function Employees() {
   } = useEmployeesView();
 
   const { t } = useTranslation('common');
+  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
 
   return (
     <Fragment>
-      <Group justify="space-between" align="center">
-        <Title order={1}>{t('employees.title')}</Title>
-        <EmployeeSearch onSearch={handleSearch} />
-      </Group>
+      {isMobile ? (
+        <Stack mb="md">
+          <Title order={1}>{t('employees.title')}</Title>
+          <EmployeeSearch onSearch={handleSearch} />
+        </Stack>
+      ) : (
+        <Group justify="space-between" align="center" mb="md">
+          <Title order={1}>{t('employees.title')}</Title>
+          <EmployeeSearch onSearch={handleSearch} />
+        </Group>
+      )}
 
       <Card radius="md" shadow="md" p={0}>
         <EmployeeContent
