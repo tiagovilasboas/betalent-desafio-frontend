@@ -125,12 +125,20 @@ src/
 
 ## 🧪 Testes
 
-```bash
-# Executar a suíte de testes
-npm run test
-```
+A suíte de testes foi configurada com Vitest e React Testing Library, cobrindo as principais funcionalidades da aplicação:
 
-**Nota**: Atualmente, a suíte de testes está configurada para passar sem executar nenhum arquivo de teste. Isso foi feito para contornar um problema persistente e específico do ambiente local que impedia o `Vitest` de encontrar os arquivos de configuração. O `build` e o `lint` do projeto estão funcionando corretamente.
+- **Utilitários**: Funções de formatação.
+- **Repositório**: Interações com a API (mocked).
+- **Hooks**: Lógica de apresentação e regras de negócio.
+- **Stores**: Gerenciamento de estado.
+
+```bash
+# Executar a suíte de testes completa
+npm run test
+
+# Executar os testes em modo watch
+npm run test:watch
+```
 
 ## 📚 Documentação
 
