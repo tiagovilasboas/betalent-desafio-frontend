@@ -109,7 +109,7 @@ export const theme: MantineThemeOverride = {
             color: theme.colors.gray[3],
           },
 
-          '&:focus, &:focus-within': {
+          ['&:focus, &:focus-within']: {
             borderColor: theme.colors.primary[6],
           },
         },
