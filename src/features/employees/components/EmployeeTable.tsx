@@ -79,7 +79,7 @@ export function EmployeeTable({
         <Table.Tr>
           <Table.Th
             style={{
-              width: '10%',
+              width: '15%',
               color: 'inherit',
               paddingLeft: '32px',
             }}
@@ -88,7 +88,7 @@ export function EmployeeTable({
               {t('employees.table.header.photo')}
             </Text>
           </Table.Th>
-          <Table.Th style={{ width: '30%', color: 'inherit' }}>
+          <Table.Th style={{ width: '20%', color: 'inherit' }}>
             <SortableHeader
               label={t('employees.table.header.name')}
               sortKey="name"
@@ -98,7 +98,7 @@ export function EmployeeTable({
               size="sm"
             />
           </Table.Th>
-          <Table.Th style={{ width: '30%', color: 'inherit' }}>
+          <Table.Th style={{ width: '20%', color: 'inherit' }}>
             <SortableHeader
               label={t('employees.table.header.job')}
               sortKey="job"
@@ -108,7 +108,7 @@ export function EmployeeTable({
               size="sm"
             />
           </Table.Th>
-          <Table.Th style={{ width: '15%', color: 'inherit' }}>
+          <Table.Th style={{ width: '20%', color: 'inherit' }}>
             <SortableHeader
               label={t('employees.table.header.admissionDate')}
               sortKey="admission_date"
@@ -118,7 +118,7 @@ export function EmployeeTable({
               size="sm"
             />
           </Table.Th>
-          <Table.Th style={{ width: '15%', color: 'inherit' }}>
+          <Table.Th style={{ width: '25%', color: 'inherit' }}>
             <Text fw={500} size="sm">
               {t('employees.table.header.phone')}
             </Text>
