@@ -1,11 +1,7 @@
-import { Loader } from '@mantine/core';
-import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
+import { Component as HomePage } from '../pages/HomePage';
 import { Layout } from './Layout';
-const LazyHomePage = lazy(() =>
-  import('../pages/HomePage').then((module) => ({ default: module.Component })),
-);
 
 export const router = createBrowserRouter([
   {
@@ -14,11 +10,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: (
-          <Suspense fallback={<Loader />}>
-            <LazyHomePage />
-          </Suspense>
-        ),
+        element: <HomePage />,
       },
     ],
   },
