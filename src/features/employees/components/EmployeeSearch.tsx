@@ -24,8 +24,19 @@ export function EmployeeSearch({ onSearch }: EmployeeSearchProps) {
     onSearch(debounced)
   }, [debounced, onSearch])
 
+  const desktopStyles = isDesktop
+    ? {
+        width: '287px',
+        height: '48px',
+      }
+    : {}
+
+  const inputPadding = {
+    padding: '12px 16px',
+  }
+
   return (
-    <Box style={isDesktop ? { minWidth: '400px' } : {}}>
+    <Box style={desktopStyles}>
       <Input
         placeholder={t('employees.search.placeholder')}
         value={value}
@@ -33,6 +44,7 @@ export function EmployeeSearch({ onSearch }: EmployeeSearchProps) {
         rightSection={<IconSearch size={20} color={colors.neutral[20]} />}
         rightSectionProps={{ style: { paddingRight: '12px' } }}
         radius="md"
+        styles={{ input: { ...inputPadding, height: '48px' } }}
       />
     </Box>
   )
