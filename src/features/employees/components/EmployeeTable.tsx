@@ -23,7 +23,7 @@ export function EmployeeTable({
 
   const rows = employees.map((employee) => (
     <Table.Tr key={employee.id}>
-      <Table.Td style={{ width: '2%' }} />
+      <Table.Td style={{ width: '5%' }} />
       <Table.Td style={{ paddingLeft: '32px' }}>
         <Avatar src={employee.image} alt={employee.name} radius="50%" />
       </Table.Td>
@@ -79,10 +79,10 @@ export function EmployeeTable({
         }}
       >
         <Table.Tr>
-          <Table.Th style={{ width: '2%' }} />
+          <Table.Th style={{ width: '5%' }} />
           <Table.Th
             style={{
-              width: '13%',
+              width: '7%',
               color: 'inherit',
               paddingLeft: '32px',
             }}
@@ -121,7 +121,7 @@ export function EmployeeTable({
               size="sm"
             />
           </Table.Th>
-          <Table.Th style={{ width: '15%', color: 'inherit' }}>
+          <Table.Th style={{ width: '18%', color: 'inherit' }}>
             <Text fw={500} size="sm">
               {t('employees.table.header.phone')}
             </Text>
