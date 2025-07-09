@@ -16,8 +16,17 @@ export interface IEmployeeRepository {
 export class EmployeeRepository implements IEmployeeRepository {
   private baseUrl: string;
 
-  constructor(baseUrl: string = 'http://localhost:3001') {
-    this.baseUrl = baseUrl;
+  constructor(baseUrl?: string) {
+    // If a baseUrl is explicitly provided, use it. Otherwise, decide based on environment.
+    if (baseUrl) {
+      this.baseUrl = baseUrl
+    } else {
+      const isLocalhost =
+        typeof window !== 'undefined' &&
+        (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+
+      this.baseUrl = isLocalhost ? 'http://localhost:3001' : '/api'
+    }
   }
 
   // SRP: Responsabilidade única - buscar todos os colaboradores

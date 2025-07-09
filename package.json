@@ -44,7 +44,8 @@
     "react-dom": "^19.1.0",
     "react-i18next": "^15.6.0",
     "react-router-dom": "^7.6.3",
-    "zustand": "^5.0.6"
+    "zustand": "^5.0.6",
+    "json-server": "^1.0.0-beta.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -71,7 +72,6 @@
     "globals": "^16.2.0",
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
-    "json-server": "^1.0.0-beta.3",
     "kill-port": "^2.0.1",
     "lint-staged": "^16.1.2",
     "plop": "^4.0.1",
