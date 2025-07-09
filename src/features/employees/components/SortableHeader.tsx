@@ -5,21 +5,23 @@ import {
   IconSelector,
 } from '@tabler/icons-react';
 
-import { useEmployeesStore } from '../store/useEmployeesStore';
 import { Employee } from '../types/employee';
 
 interface SortableHeaderProps {
   label: string;
   sortKey: keyof Employee;
+  currentSortKey: keyof Employee | '';
+  sortOrder: 'asc' | 'desc';
+  onSort: (key: keyof Employee) => void;
 }
 
-export function SortableHeader({ label, sortKey }: SortableHeaderProps) {
-  const {
-    sortKey: currentSortKey,
-    sortOrder,
-    setSorting,
-  } = useEmployeesStore();
-
+export function SortableHeader({
+  label,
+  sortKey,
+  currentSortKey,
+  sortOrder,
+  onSort,
+}: SortableHeaderProps) {
   const isCurrent = currentSortKey === sortKey;
   const Icon = isCurrent
     ? sortOrder === 'asc'
@@ -28,11 +30,11 @@ export function SortableHeader({ label, sortKey }: SortableHeaderProps) {
     : IconSelector;
 
   return (
-    <UnstyledButton onClick={() => setSorting(sortKey)}>
+    <UnstyledButton onClick={() => onSort(sortKey)}>
       <Group gap="xs" wrap="nowrap">
         <Text fw={500}>{label}</Text>
         <Icon size={14} />
       </Group>
     </UnstyledButton>
   );
-} 
+}

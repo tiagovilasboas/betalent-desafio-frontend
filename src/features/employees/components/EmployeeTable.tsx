@@ -7,9 +7,17 @@ import { SortableHeader } from './SortableHeader';
 
 interface EmployeeTableProps {
   employees: Employee[];
+  sortKey: keyof Employee | '';
+  sortOrder: 'asc' | 'desc';
+  onSort: (key: keyof Employee) => void;
 }
 
-export function EmployeeTable({ employees }: EmployeeTableProps) {
+export function EmployeeTable({
+  employees,
+  sortKey,
+  sortOrder,
+  onSort,
+}: EmployeeTableProps) {
   const theme = useMantineTheme();
   const { t } = useTranslation('common');
 
@@ -80,18 +88,27 @@ export function EmployeeTable({ employees }: EmployeeTableProps) {
             <SortableHeader
               label={t('employees.table.header.name')}
               sortKey="name"
+              currentSortKey={sortKey}
+              sortOrder={sortOrder}
+              onSort={onSort}
             />
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
             <SortableHeader
               label={t('employees.table.header.job')}
               sortKey="job"
+              currentSortKey={sortKey}
+              sortOrder={sortOrder}
+              onSort={onSort}
             />
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
             <SortableHeader
               label={t('employees.table.header.admissionDate')}
               sortKey="admission_date"
+              currentSortKey={sortKey}
+              sortOrder={sortOrder}
+              onSort={onSort}
             />
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>

@@ -16,14 +16,28 @@ export const formatDate = (dateString: string): string => {
 export const formatPhone = (phone: string): string => {
   const cleaned = phone.replace(/\D/g, '');
 
-  // Remove o código do país (55) se ele existir e o número tiver 13 dígitos
-  const sanitized =
-    cleaned.startsWith('55') && cleaned.length === 13
-      ? cleaned.slice(2)
-      : cleaned;
+  // Padrão esperado: 55 (País) + XX (DDD) + (8 ou 9 dígitos)
+  // Ex: 5511987654321
+  if (cleaned.length === 13 && cleaned.startsWith('55')) {
+    const country = cleaned.slice(0, 2);
+    const area = cleaned.slice(2, 4);
+    const number = cleaned.slice(4);
+    if (number.length === 9) {
+      return `+${country} (${area}) ${number.slice(0, 5)}-${number.slice(5)}`;
+    }
+    // Lida com números de 8 dígitos se necessário
+    return `+${country} (${area}) ${number.slice(0, 4)}-${number.slice(4)}`;
+  }
 
-  const match = sanitized.match(/^(\d{2})(\d{5})(\d{4})$/);
-  return match ? `+ (${match[1]}) ${match[2]}-${match[3]}` : phone;
+  // Fallback para números sem o código do país (formato antigo)
+  if (cleaned.length === 11) {
+    const area = cleaned.slice(0, 2);
+    const number = cleaned.slice(2);
+    return `+55 (${area}) ${number.slice(0, 5)}-${number.slice(5)}`;
+  }
+
+  // Se não corresponder a nenhum padrão, retorna o original.
+  return phone;
 };
 
 /**

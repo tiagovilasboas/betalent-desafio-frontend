@@ -1,44 +1,32 @@
 // Camada de Apresentação - Responsabilidade: capturar input do usuário
 // Dependency Rule: Depende da camada de estado
 
-import { TextInput } from '@mantine/core';
+import { Input } from '@mantine/core';
+import { useDebouncedValue } from '@mantine/hooks';
+import { IconSearch } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import SearchIconUrl from '../../../assets/icon-search.svg';
-import { useEmployeesStore } from '../store/useEmployeesStore';
+interface EmployeeSearchProps {
+  onSearch: (value: string) => void;
+}
 
-export function EmployeeSearch() {
-  const { filters, setFilters } = useEmployeesStore();
-  const [searchValue, setSearchValue] = useState(filters.search);
+export function EmployeeSearch({ onSearch }: EmployeeSearchProps) {
+  const [value, setValue] = useState('');
+  const [debounced] = useDebouncedValue(value, 300);
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setFilters({ ...filters, search: searchValue });
-    }, 300); // 300ms debounce delay
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [searchValue, setFilters, filters]);
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.currentTarget.value);
-  };
+    onSearch(debounced);
+  }, [debounced, onSearch]);
 
   return (
-    <TextInput
+    <Input
       placeholder={t('employees.search.placeholder')}
-      value={searchValue}
-      onChange={handleSearchChange}
+      value={value}
+      onChange={(event) => setValue(event.currentTarget.value)}
       rightSection={
-        <img
-          src={SearchIconUrl}
-          alt={t('employees.search.alt')}
-          width={20}
-          height={20}
-        />
+        <IconSearch size={20} />
       }
       rightSectionProps={{ style: { paddingRight: '12px' } }}
       radius="md"
