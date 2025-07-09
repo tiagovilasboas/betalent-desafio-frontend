@@ -1,6 +1,7 @@
 import './i18n'
 import './index.css'
 import '@mantine/core/styles.css'
+import './styles/fonts.css'
 
 import { MantineProvider } from '@mantine/core'
 import React from 'react'
