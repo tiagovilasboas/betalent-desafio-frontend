@@ -54,8 +54,8 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 | `npm run preview`| Inicia um servidor local para visualizar a versão de produção (após o `build`).         |
 | `npm run test` | Executa a suíte de testes completa com Vitest.                                          |
 | `npm run lint` | Analisa o código em busca de erros de formatação e estilo com ESLint.                   |
-| `npm run analyze`| Gera uma análise visual do tamanho dos bundles de produção (`stats.html`).              |
-| `npm run lighthouse`| Executa a suíte de testes do Lighthouse na versão de produção.                        |
+| `npm run analyze`| Gera uma análise visual e interativa do tamanho dos bundles de produção (`dist/stats.html`), ajudando a identificar oportunidades de otimização. |
+| `npm run lighthouse`| Executa a suíte de testes do Lighthouse na versão de produção para auditar performance, PWA, acessibilidade e SEO. |
 
 ## ✨ Diferenciais e Boas Práticas Adotadas
 
@@ -67,14 +67,19 @@ Além dos requisitos básicos, o projeto foi desenvolvido com foco em qualidade 
 - **Princípios S.O.L.I.D.**: O código foi escrito seguindo o **Princípio da Responsabilidade Única (SRP)**. A lógica de apresentação (filtros, ordenação, paginação) foi isolada no hook `useEmployeesView`, que atua como um **Proxy de Apresentação**. Os componentes da UI (`EmployeeTable`, `EmployeeCard`, etc.) são "burros" e apenas recebem dados e funções, enquanto o `useEmployeesStore` (Zustand) atua puramente como um cache de dados brutos da API.
 - **Clean Code**: Adoção de nomes claros para variáveis e funções, baixo aninhamento e complexidade de código, e uso de componentes pequenos e focados.
 
-### Performance, UX e PWA
+### Otimização de Performance e Core Web Vitals
 
-- **Progressive Web App (PWA)**: A aplicação é um PWA completo, com um `manifest.webmanifest` e ícones, permitindo que seja "instalada" em dispositivos móveis e desktops para uma experiência mais próxima a um app nativo.
-- **Code Splitting Estratégico**: O código da feature principal (`employees`) é separado em seu próprio "chunk" de JavaScript. Isso significa que o bundle inicial carregado pelo navegador é mínimo, e o código da feature só é baixado quando necessário, melhorando o tempo de carregamento inicial.
-- **Lazy Loading de Componentes**: Utilização de `React.lazy` e `Suspense` para carregar componentes de forma preguiçosa, com um **Skeleton Loader** como fallback, melhorando a percepção de velocidade.
-- **Fontes Auto-hospedadas (Self-hosting)**: As fontes do projeto (Roboto) são servidas junto com a aplicação, eliminando requisições a domínios externos (como `fonts.googleapis.com`) e reduzindo a latência para a primeira pintura de conteúdo (FCP).
-- **Pré-carregamento de Dados da API**: Uma tag `<link rel="preload">` no `index.html` instrui o navegador a iniciar o download dos dados dos funcionários em paralelo com os scripts, fazendo com que a renderização do conteúdo principal (LCP) ocorra muito mais rápido.
-- **Debounce na Busca**: Para otimizar a performance, a função de busca aguarda 300ms após o usuário parar de digitar para realizar a filtragem, evitando re-renderizações excessivas.
+A performance da aplicação foi uma prioridade, com foco em otimizar os **Core Web Vitals** (principais métricas do Google para experiência do usuário). As auditorias foram realizadas com o **Lighthouse**, e as seguintes técnicas foram implementadas para garantir tempos de carregamento rápidos e uma experiência fluida:
+
+- **Análise de Bundle e Code Splitting**: Utilizando o script `npm run analyze` (com `rollup-plugin-visualizer`), identificamos que a feature `employees` e suas dependências representavam uma parte significativa do bundle inicial. Para otimizar, foi implementado o **code splitting estratégico** via `manualChunks` no `vite.config.ts`, separando a feature em seu próprio "chunk". Isso reduz drasticamente o tamanho do bundle principal, melhorando o tempo de carregamento inicial (FCP).
+- **Lazy Loading de Componentes**: Dentro da feature, o componente `EmployeeTable` (o mais pesado) é carregado de forma preguiçosa com `React.lazy` e `Suspense`. Enquanto ele carrega, um **Skeleton Loader** é exibido, melhorando a percepção de velocidade e a experiência do usuário.
+- **Fontes Auto-hospedadas (Self-hosting)**: As fontes (Roboto) são servidas junto com a aplicação, eliminando requisições a domínios externos (como `fonts.googleapis.com`) e reduzindo a latência para a **Primeira Pintura de Conteúdo (FCP)**.
+- **Pré-carregamento de Recursos Críticos**: Uma tag `<link rel="preload">` no `index.html` instrui o navegador a iniciar o download dos dados da API em paralelo com os scripts. Isso garante que os dados necessários para a **Maior Pintura de Conteúdo (LCP)** estejam disponíveis mais cedo, acelerando a renderização da tabela de funcionários.
+- **Debounce na Busca**: Para otimizar a performance da interação, a função de busca aguarda 300ms após o usuário parar de digitar para realizar a filtragem, evitando re-renderizações excessivas e garantindo uma UI responsiva.
+
+### Progressive Web App (PWA)
+
+A aplicação é um PWA completo, com um `manifest.webmanifest` e ícones otimizados, permitindo que seja "instalada" em dispositivos móveis e desktops para uma experiência mais próxima a um app nativo, com acesso offline (cache) e performance aprimorada.
 
 ### Desenvolvimento e Manutenção (DX)
 
