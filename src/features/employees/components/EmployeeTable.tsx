@@ -15,7 +15,7 @@ export function EmployeeTable({ employees }: EmployeeTableProps) {
 
   const rows = employees.map((employee) => (
     <Table.Tr key={employee.id}>
-      <Table.Td style={{ paddingLeft: theme.spacing.xl }}>
+      <Table.Td style={{ paddingLeft: '32px' }}>
         <Avatar src={employee.image} alt={employee.name} radius="50%" />
       </Table.Td>
       <Table.Td>
@@ -41,15 +41,25 @@ export function EmployeeTable({ employees }: EmployeeTableProps) {
         overflow: 'hidden',
         width: '100%',
       }}
-      styles={(theme) => ({
+      styles={{
         tr: {
           borderBottom: `1px solid ${theme.colors.gray[2]}`,
         },
-        td: {
-          paddingTop: '4px',
-          paddingBottom: '4px',
+        th: {
+          padding: '16px',
+          [`@media (min-width: ${theme.breakpoints.sm})`]: {
+            paddingLeft: '32px',
+            paddingRight: '32px',
+          },
         },
-      })}
+        td: {
+          padding: '16px',
+          [`@media (min-width: ${theme.breakpoints.sm})`]: {
+            paddingLeft: '32px',
+            paddingRight: '32px',
+          },
+        },
+      }}
     >
       <Table.Thead
         style={{
@@ -59,7 +69,10 @@ export function EmployeeTable({ employees }: EmployeeTableProps) {
       >
         <Table.Tr>
           <Table.Th
-            style={{ color: 'inherit', paddingLeft: theme.spacing.xl }}
+            style={{
+              color: 'inherit',
+              paddingLeft: '32px',
+            }}
           >
             <Text fw={500}>{t('employees.table.header.photo')}</Text>
           </Table.Th>
