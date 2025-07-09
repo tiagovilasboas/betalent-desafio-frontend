@@ -1,11 +1,22 @@
-import { Loader } from '@mantine/core';
 import { lazy, Suspense } from 'react';
 
-const LazyEmployees = lazy(() => import('@/features/employees/components/Employees'));
+import { Center } from '@mantine/core';
+
+import EmployeeTableSkeleton from '@/features/employees/components/EmployeeTableSkeleton';
+
+const LazyEmployees = lazy(
+  () => import('@/features/employees/components/Employees'),
+);
 
 export function Component() {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense
+      fallback={
+        <Center style={{ height: '100%' }}>
+          <EmployeeTableSkeleton />
+        </Center>
+      }
+    >
       <LazyEmployees />
     </Suspense>
   );
