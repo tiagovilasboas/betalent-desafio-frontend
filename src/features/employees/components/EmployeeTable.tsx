@@ -24,7 +24,7 @@ export function EmployeeTable({
   const rows = employees.map((employee) => (
     <Table.Tr key={employee.id}>
       <Table.Td style={{ width: '5%' }} />
-      <Table.Td style={{ paddingLeft: '32px' }}>
+      <Table.Td style={{ paddingLeft: 0 }}>
         <Avatar src={employee.image} alt={employee.name} radius="50%" />
       </Table.Td>
       <Table.Td>
@@ -84,7 +84,7 @@ export function EmployeeTable({
             style={{
               width: '7%',
               color: 'inherit',
-              paddingLeft: '32px',
+              paddingLeft: 0,
             }}
           >
             <Text fw={500} size="sm">
