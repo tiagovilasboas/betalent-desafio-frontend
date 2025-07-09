@@ -1,6 +1,13 @@
 // src/api/apiClient.ts
 
-const API_BASE_URL = 'http://localhost:3001'
+// Dynamically choose the base URL depending on where the app is running.
+// If we are on localhost we keep using the local JSON-Server (port 3001).
+// In production (e.g. Vercel) we call the serverless function mounted at `/api`.
+const isLocalhost =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+
+const API_BASE_URL = isLocalhost ? 'http://localhost:3001' : '/api'
 
 async function client<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`
