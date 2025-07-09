@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "devCommand": "npm run dev",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/[...].ts": {
+      "memory": 128,
+      "maxDuration": 10,
+      "includeFiles": "db.json"
+    }
+  }
+}
