@@ -42,21 +42,6 @@ export function EmployeeSearch() {
       }
       rightSectionProps={{ style: { paddingRight: '12px' } }}
       radius="md"
-      styles={(theme) => ({
-        input: {
-          height: '48px',
-          paddingRight: '44px',
-          color: theme.colors.gray[3],
-          borderColor: theme.colors.gray[2],
-          '&::placeholder': {
-            color: theme.colors.gray[2],
-          },
-          '&:focus, &:focusWithin': {
-            outline: 'none',
-            borderColor: theme.colors.primary[6],
-          },
-        },
-      })}
     />
   );
 } 
