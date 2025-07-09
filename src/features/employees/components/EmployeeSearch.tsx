@@ -7,6 +7,8 @@ import { IconSearch } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { colors } from '@/styles/tokens'
+
 interface EmployeeSearchProps {
   onSearch: (value: string) => void
 }
@@ -26,7 +28,7 @@ export function EmployeeSearch({ onSearch }: EmployeeSearchProps) {
         placeholder={t('employees.search.placeholder')}
         value={value}
         onChange={(event) => setValue(event.currentTarget.value)}
-        rightSection={<IconSearch size={20} />}
+        rightSection={<IconSearch size={20} color={colors.neutral[20]} />}
         rightSectionProps={{ style: { paddingRight: '12px' } }}
         radius="md"
       />
