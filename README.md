@@ -1,9 +1,18 @@
 # 🎯 Desafio Front-end BeTalent
 
-[![Deploy with Vercel](https://vercel.com/button)](https://betalent-desafio-frontend.vercel.app/)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-brightgreen)](https://betalent-desafio-frontend.vercel.app/)
+### ✨ [Acesse a demonstração ao vivo](https://betalent-desafio-frontend.vercel.app/)
 
 Solução para o teste técnico front-end da BeTalent - interface responsiva para visualização de colaboradores com funcionalidade de pesquisa.
+
+<p align="left">
+  <a href="https://react.dev/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"></a>
+  <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"></a>
+  <a href="https://vitejs.dev/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white" alt="Vite"></a>
+  <a href="https://mantine.dev/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Mantine-339AF0?style=for-the-badge&logo=mantine&logoColor=white" alt="Mantine"></a>
+  <a href="https://github.com/pmndrs/zustand" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white" alt="Zustand"></a>
+  <a href="https://vitest.dev/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest"></a>
+  <a href="https://eslint.org/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint"></a>
+</p>
 
 ## 📋 Sobre o Desafio
 
