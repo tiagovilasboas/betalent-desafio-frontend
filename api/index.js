@@ -15,6 +15,9 @@ server.use(middlewares)
 server.use(router)
 
 export default function handler(req, res) {
-  // Delegate to JSON-Server Express app
+  // Remove the `/api` prefix that Vercel adds so json-server routes match (e.g., /employees)
+  if (req.url.startsWith('/api')) {
+    req.url = req.url.replace(/^\/api/, '') || '/'
+  }
   return server(req, res)
 }
