@@ -103,7 +103,7 @@ export const theme: MantineThemeOverride = {
         input: {
           backgroundColor: theme.white,
           color: theme.colors.gray[4],
-          borderColor: theme.colors.gray[3],
+          borderColor: theme.colors.gray[2],
 
           '&::placeholder': {
             color: theme.colors.gray[3],
