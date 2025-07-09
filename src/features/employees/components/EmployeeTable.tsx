@@ -1,15 +1,15 @@
-import { Avatar, Table, Text, useMantineTheme } from '@mantine/core';
-import { useTranslation } from 'react-i18next';
+import { Avatar, Table, Text, useMantineTheme } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 
-import { Employee } from '../types/employee';
-import { formatDate, formatPhone } from '../types/formatters';
-import { SortableHeader } from './SortableHeader';
+import { Employee } from '../types/employee'
+import { formatDate, formatPhone } from '../types/formatters'
+import { SortableHeader } from './SortableHeader'
 
 interface EmployeeTableProps {
-  employees: Employee[];
-  sortKey: keyof Employee | '';
-  sortOrder: 'asc' | 'desc';
-  onSort: (key: keyof Employee) => void;
+  employees: Employee[]
+  sortKey: keyof Employee | ''
+  sortOrder: 'asc' | 'desc'
+  onSort: (key: keyof Employee) => void
 }
 
 export function EmployeeTable({
@@ -18,8 +18,8 @@ export function EmployeeTable({
   sortOrder,
   onSort,
 }: EmployeeTableProps) {
-  const theme = useMantineTheme();
-  const { t } = useTranslation('common');
+  const theme = useMantineTheme()
+  const { t } = useTranslation('common')
 
   const rows = employees.map((employee) => (
     <Table.Tr key={employee.id}>
@@ -30,16 +30,16 @@ export function EmployeeTable({
         <Text fw={500}>{employee.name}</Text>
       </Table.Td>
       <Table.Td>
-        <Text size="sm">{employee.job}</Text>
+        <Text>{employee.job}</Text>
       </Table.Td>
       <Table.Td>
-        <Text size="sm">{formatDate(employee.admission_date)}</Text>
+        <Text>{formatDate(employee.admission_date)}</Text>
       </Table.Td>
       <Table.Td>
-        <Text size="sm">{formatPhone(employee.phone)}</Text>
+        <Text>{formatPhone(employee.phone)}</Text>
       </Table.Td>
     </Table.Tr>
-  ));
+  ))
 
   return (
     <Table
@@ -82,7 +82,9 @@ export function EmployeeTable({
               paddingLeft: '32px',
             }}
           >
-            <Text fw={500}>{t('employees.table.header.photo')}</Text>
+            <Text fw={500} size="sm">
+              {t('employees.table.header.photo')}
+            </Text>
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
             <SortableHeader
@@ -91,6 +93,7 @@ export function EmployeeTable({
               currentSortKey={sortKey}
               sortOrder={sortOrder}
               onSort={onSort}
+              size="sm"
             />
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
@@ -100,6 +103,7 @@ export function EmployeeTable({
               currentSortKey={sortKey}
               sortOrder={sortOrder}
               onSort={onSort}
+              size="sm"
             />
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
@@ -109,14 +113,17 @@ export function EmployeeTable({
               currentSortKey={sortKey}
               sortOrder={sortOrder}
               onSort={onSort}
+              size="sm"
             />
           </Table.Th>
           <Table.Th style={{ color: 'inherit' }}>
-            <Text fw={500}>{t('employees.table.header.phone')}</Text>
+            <Text fw={500} size="sm">
+              {t('employees.table.header.phone')}
+            </Text>
           </Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
     </Table>
-  );
-} 
+  )
+}

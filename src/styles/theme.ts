@@ -1,6 +1,6 @@
-import { MantineTheme, MantineThemeOverride } from '@mantine/core';
+import { MantineTheme, MantineThemeOverride } from '@mantine/core'
 
-import { colors, shadows, spaces, typography } from './tokens';
+import { colors, shadows, spaces, typography } from './tokens'
 
 export const theme: MantineThemeOverride = {
   // Cores do tema
@@ -98,16 +98,18 @@ export const theme: MantineThemeOverride = {
         },
       },
     },
-    TextInput: {
+    Input: {
       styles: (theme: MantineTheme) => ({
         input: {
           backgroundColor: theme.white,
-          color: theme.other.colors.neutral['20'],
-          borderColor: theme.other.colors.neutral['10'], // Borda mais clara
+          color: theme.colors.gray[4],
+          borderColor: theme.colors.gray[3],
+
           '&::placeholder': {
-            color: theme.other.colors.neutral['20'], // Placeholder mais claro
+            color: theme.colors.gray[3],
           },
-          '&:focus': {
+
+          '&:focus, &:focus-within': {
             borderColor: theme.colors.primary[6],
           },
         },
@@ -147,4 +149,4 @@ export const theme: MantineThemeOverride = {
     shadows,
     typography,
   },
-}; 
+}
