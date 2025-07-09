@@ -71,6 +71,22 @@ Além dos requisitos básicos, o projeto foi desenvolvido com foco em qualidade 
 
 A performance da aplicação foi uma prioridade, com foco em otimizar os **Core Web Vitals** (principais métricas do Google para experiência do usuário). As auditorias foram realizadas com o **Lighthouse**, e as seguintes técnicas foram implementadas para garantir tempos de carregamento rápidos e uma experiência fluida:
 
+#### Resultados da Auditoria Lighthouse
+
+| Categoria          | Score |
+| ------------------ | :---: |
+| 🚀 **Performance**   |  95%  |
+| ♿ **Acessibilidade**|  83%  |
+| 🛠️ **Best Practices** | 100%  |
+| 📈 **SEO**           |  75%  |
+
+| Métrica Core Web Vitals | Tempo  |
+| ----------------------- | :----: |
+| **FCP** (First Contentful Paint) | 2.1 s  |
+| **LCP** (Largest Contentful Paint) | 2.6 s  |
+
+#### Estratégias de Otimização
+
 - **Análise de Bundle e Code Splitting**: Utilizando o script `npm run analyze` (com `rollup-plugin-visualizer`), identificamos que a feature `employees` e suas dependências representavam uma parte significativa do bundle inicial. Para otimizar, foi implementado o **code splitting estratégico** via `manualChunks` no `vite.config.ts`, separando a feature em seu próprio "chunk". Isso reduz drasticamente o tamanho do bundle principal, melhorando o tempo de carregamento inicial (FCP).
 - **Lazy Loading de Componentes**: Dentro da feature, o componente `EmployeeTable` (o mais pesado) é carregado de forma preguiçosa com `React.lazy` e `Suspense`. Enquanto ele carrega, um **Skeleton Loader** é exibido, melhorando a percepção de velocidade e a experiência do usuário.
 - **Fontes Auto-hospedadas (Self-hosting)**: As fontes (Roboto) são servidas junto com a aplicação, eliminando requisições a domínios externos (como `fonts.googleapis.com`) e reduzindo a latência para a **Primeira Pintura de Conteúdo (FCP)**.
