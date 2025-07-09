@@ -55,20 +55,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'react-vendor';
-            }
-            if (id.includes('@mantine') || id.includes('@emotion')) {
-              return 'mantine-vendor';
-            }
-            if (id.includes('lucide-react')) {
-              return 'ui-vendor';
-            }
-            return 'vendor';
-          }
           if (id.includes('src/features/employees')) {
             return 'employees-feature';
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor';
           }
         },
       },
