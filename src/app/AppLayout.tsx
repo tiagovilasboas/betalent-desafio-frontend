@@ -10,7 +10,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
 
-import { LanguageSwitcher } from './components/LanguageSwitcher'
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 
 export function AppLayout() {
   const [opened, { toggle }] = useDisclosure();

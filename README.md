@@ -60,6 +60,7 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 - Filtra por nome, cargo e telefone
 - Busca case-insensitive
 - Debounce para otimização de performance
+- Suporte a múltiplos idiomas (PT-BR/EN) com detecção automática e seletor manual
 
 ### Interface
 - Design moderno e intuitivo
