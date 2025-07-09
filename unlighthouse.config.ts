@@ -1,12 +1,23 @@
 export default {
-  site: 'http://localhost:5173', // A URL base do seu site
+  // URL base do site em desenvolvimento
+  site: 'http://localhost:5173',
+
+  // Configuração do scanner para não procurar por um build estático
   scanner: {
-    // A pasta onde o build de produção está localizado
-    dist: 'dist',
+    // Não é necessário especificar o diretório `dist` para o modo de desenvolvimento
+    exclude: ['/404'],
   },
-  // Configuração do servidor local para servir os arquivos estáticos
-  server: {
-    // A pasta raiz do servidor
-    root: 'dist',
+
+  // O Unlighthouse vai se conectar ao servidor de desenvolvimento existente
+  // em vez de iniciar um novo.
+  server: {},
+
+  // Configurações do cliente Unlighthouse (UI)
+  client: {
+    // Desativa a necessidade de uma chave de API para o modo local
+    apiToken: false,
   },
-}
+
+  // Habilita o cache para acelerar análises futuras
+  cache: true,
+};
