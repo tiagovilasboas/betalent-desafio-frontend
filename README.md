@@ -1,8 +1,9 @@
 # 🎯 Desafio Front-end BeTalent
 
-Demonstração ao vivo: [betalent-desafio-frontend.vercel.app](https://betalent-desafio-frontend.vercel.app/)
-
 Solução para o teste técnico front-end da BeTalent - interface responsiva para visualização de colaboradores com funcionalidade de pesquisa.
+
+🌐 **Demo:** [betalent-desafio-frontend.vercel.app](https://betalent-desafio-frontend.vercel.app/)<br />
+👨‍💻 **Autor:** [Tiago Vilas Boas](https://github.com/tiagovilasboas)
 
 <p align="left">
   <a href="https://react.dev/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"></a>
