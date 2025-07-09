@@ -7,7 +7,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useEmployeesView } from '../hooks/useEmployeesView';
@@ -29,6 +29,18 @@ export default function Employees() {
     handlePageChange,
     fetchEmployees,
   } = useEmployeesView();
+  const [showSkeleton, setShowSkeleton] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setShowSkeleton(true);
+      }, 200); // Atraso de 200ms para exibir o skeleton
+
+      return () => clearTimeout(timer);
+    }
+    setShowSkeleton(false);
+  }, [loading]);
 
   const { t } = useTranslation('common');
   const theme = useMantineTheme();
@@ -49,9 +61,9 @@ export default function Employees() {
       )}
 
       <Card radius="md" shadow="md" p={0}>
-        {loading ? (
+        {loading && showSkeleton ? (
           <EmployeeTableSkeleton />
-        ) : (
+        ) : !loading ? (
           <EmployeeContent
             apiError={apiError}
             employees={paginatedEmployees}
@@ -60,7 +72,7 @@ export default function Employees() {
             onSort={handleSort}
             onRetry={fetchEmployees}
           />
-        )}
+        ) : null}
       </Card>
 
       {totalPages > 1 && (
