@@ -94,6 +94,8 @@ Além dos requisitos básicos, o projeto foi desenvolvido com foco em qualidade 
 ### Desenvolvimento e Manutenção (DX)
 
 - **Gerenciamento de Estado Desacoplado**: Utilização do **Zustand** (`useEmployeesStore`) como um cache de dados brutos da API, enquanto toda a lógica de UI (filtros, paginação, ordenação) é gerenciada localmente pelo hook `useEmployeesView`, mantendo o estado global enxuto e a lógica de apresentação contida.
+- **CI com GitHub Actions**: O projeto possui um workflow de Integração Contínua que roda a suíte de testes (`lint`, `type-check`, `test`) a cada `push` ou `pull request` na branch `main`, garantindo a estabilidade e a qualidade do código antes da integração.
+- **Abstração da Camada de API**: As chamadas de rede são centralizadas em um `apiClient` genérico, desacoplando a aplicação da implementação específica do `fetch`. Isso facilita a manutenção, o tratamento de erros e futuras migrações de tecnologia (ex: para GraphQL).
 - **Scripts Otimizados**: O script `npm run dev` utiliza `concurrently` e `kill-port` para gerenciar os processos da API e do front-end com um único comando, garantindo que as portas sejam liberadas para evitar conflitos (`EADDRINUSE`).
 - **Commits Semânticos**: O histórico de commits segue o padrão **Conventional Commits**, o que torna o histórico mais legível, facilita a revisão do código e permite a automação de changelogs.
 - **Design System com Mantine**: O projeto utiliza o **Mantine** como base para a UI, com um `theme.ts` centralizado que exporta tokens de design (cores, tipografia, etc.), garantindo consistência visual e agilidade no desenvolvimento.
@@ -112,15 +114,20 @@ Este projeto foi desenvolvido utilizando o [React + Vite Boilerplate](https://gi
 ## 📁 Estrutura do Projeto
 
 ```
+.github/
+└── workflows/
+    └── ci.yml          # Workflow de Integração Contínua
+
 src/
+├── api/                # Cliente de API centralizado (abstração do fetch)
 └── features/
-    └── employees/          # Feature principal do desafio
-        ├── api/            # Integração com API (Axios)
-        ├── components/     # Componentes da interface (dumb components)
-        ├── hooks/          # Hooks customizados (lógica de apresentação)
-        ├── repository/     # Repositório de dados (abstração da API)
-        ├── store/          # Gerenciamento de estado (cache do Zustand)
-        └── types/          # Tipos TypeScript
+    └── employees/      # Feature principal do desafio
+        ├── api/        # Definição dos endpoints da feature
+        ├── components/ # Componentes da interface (dumb components)
+        ├── hooks/      # Hooks customizados (lógica de apresentação)
+        ├── repository/ # Repositório de dados (abstração da API)
+        ├── store/      # Gerenciamento de estado (cache do Zustand)
+        └── types/      # Tipos TypeScript
 ```
 
 ## 🧪 Testes
