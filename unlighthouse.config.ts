@@ -1,23 +1,18 @@
 export default {
-  // URL base do site em desenvolvimento
-  site: 'http://localhost:5173',
+  // URL base do site em ambiente de preview (produção)
+  site: 'http://localhost:4173',
 
-  // Configuração do scanner para não procurar por um build estático
   scanner: {
-    // Não é necessário especificar o diretório `dist` para o modo de desenvolvimento
+    // Não é necessário especificar o diretório `dist` se estamos auditando um servidor em execução
     exclude: ['/404'],
   },
 
-  // O Unlighthouse vai se conectar ao servidor de desenvolvimento existente
-  // em vez de iniciar um novo.
+  // O Unlighthouse vai se conectar ao servidor de preview existente
   server: {},
 
-  // Configurações do cliente Unlighthouse (UI)
   client: {
-    // Desativa a necessidade de uma chave de API para o modo local
     apiToken: false,
   },
 
-  // Habilita o cache para acelerar análises futuras
   cache: true,
 };
