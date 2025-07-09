@@ -1,8 +1,10 @@
 # 🎯 Desafio Front-end BeTalent
 
-[**Acessar a Aplicação →**](https://betalent-desafio-frontend.vercel.app/)
-
 Solução para o teste técnico front-end da BeTalent - interface responsiva para visualização de colaboradores com funcionalidade de pesquisa.
+
+> [!NOTE]
+> **Acesse a versão ao vivo do projeto, hospedada na Vercel:**
+> ### [betalent-desafio-frontend.vercel.app](https://betalent-desafio-frontend.vercel.app/)
 
 ## 📋 Sobre o Desafio
 
