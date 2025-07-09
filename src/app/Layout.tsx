@@ -12,7 +12,7 @@ import { Outlet } from 'react-router-dom';
 
 import { LanguageSwitcher } from './components/LanguageSwitcher';
 
-export function AppLayout() {
+export function Layout() {
   const [opened, { toggle }] = useDisclosure();
   const theme = useMantineTheme();
 
