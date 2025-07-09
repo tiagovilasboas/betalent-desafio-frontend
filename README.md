@@ -17,22 +17,22 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 - ✅ **API Simulada**: Integração com json-server
 - ✅ **Tecnologias**: React.js com TypeScript (diferencial)
 - ✅ **Suporte a múltiplos idiomas (PT-BR/EN)**: Detecção automática e seletor manual
+- ✅ **Progressive Web App (PWA)**: Otimizado para instalação em dispositivos móveis e desktops.
 
 ## 🚀 Como Executar
 
 ### Pré-requisitos
 
 - Node.js (versão 20 LTS ou superior)
-- npm ou yarn
-- json-server
+- npm
 
-### Instalação e Execução
+### Instalação
 
 1. **Clone o repositório**:
 
    ```bash
-   git clone <seu-repositorio>
-   cd <seu-projeto>
+   git clone https://github.com/tiagovilasboas/betalent-desafio-frontend.git
+   cd betalent-desafio-frontend
    ```
 
 2. **Instale as dependências**:
@@ -41,79 +41,17 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
    npm install
    ```
 
-3. **Execute a aplicação e a API simulada**:
-   O projeto utiliza o `concurrently` para iniciar o servidor de desenvolvimento do Vite e o `json-server` simultaneamente.
+### Scripts Disponíveis
 
-   ```bash
-   npm run dev
-   ```
-
-4. **Acesse a aplicação**: http://localhost:5173
-
-## � Deploy
-
-A aplicação está publicada na **Vercel** e pode ser acessada em:
-
-👉 https://betalent-desafio-frontend.vercel.app/
-
-O deploy é realizado automaticamente a cada _push_ na branch `main`. A Vercel executa a pipeline abaixo, descrita no arquivo `vercel.json`:
-
-1. **Instalação de dependências** (`npm install`)
-2. **Execução da suíte de testes** (`npm test`)
-3. **Build de produção** (`npm run build`)
-4. **Publicação** do diretório `dist` e da _serverless function_ em `api/index.js`.
-
-```json
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "api/index.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": "db.json" }
-    }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.js" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ],
-  "devCommand": "npm run dev",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist"
-}
-```
-
-Com isso, o fluxo de **CI/CD** fica totalmente automatizado e sem intervenção manual.
-
-## �🎨 Funcionalidades
-
-### Tabela de Colaboradores
-
-- Exibe dados completos dos colaboradores
-- Layout responsivo (tabela no desktop, cards no mobile)
-- Estados de loading e erro
-- Formatação adequada de datas e telefones
-
-### Pesquisa
-
-- Input de pesquisa em tempo real
-- Filtra por nome, cargo e telefone
-- Busca case-insensitive
-- Debounce para otimização de performance
-- Suporte a múltiplos idiomas (PT-BR/EN) com detecção automática e seletor manual
-
-### Interface
-
-- Design moderno e intuitivo
-- Responsividade completa
-- Estados visuais adequados
-- Acessibilidade implementada
+| Script         | Descrição                                                                               |
+| -------------- | --------------------------------------------------------------------------------------- |
+| `npm run dev`  | Inicia o servidor de desenvolvimento (front-end) e a API simulada (`json-server`).      |
+| `npm run build`| Compila a aplicação para produção, gerando os arquivos otimizados no diretório `dist/`. |
+| `npm run preview`| Inicia um servidor local para visualizar a versão de produção (após o `build`).         |
+| `npm run test` | Executa a suíte de testes completa com Vitest.                                          |
+| `npm run lint` | Analisa o código em busca de erros de formatação e estilo com ESLint.                   |
+| `npm run analyze`| Gera uma análise visual do tamanho dos bundles de produção (`stats.html`).              |
+| `npm run lighthouse`| Executa a suíte de testes do Lighthouse na versão de produção.                        |
 
 ## ✨ Diferenciais e Boas Práticas Adotadas
 
@@ -123,23 +61,25 @@ Além dos requisitos básicos, o projeto foi desenvolvido com foco em qualidade 
 
 - **Arquitetura em Camadas**: A estrutura do projeto (`pages`, `features`, `components`, `api`, `store`) isola responsabilidades, seguindo a **Dependency Rule** e facilitando a manutenção e escalabilidade futura.
 - **Princípios S.O.L.I.D.**: O código foi escrito seguindo o **Princípio da Responsabilidade Única (SRP)**. A lógica de apresentação (filtros, ordenação, paginação) foi isolada no hook `useEmployeesView`, que atua como um **Proxy de Apresentação**. Os componentes da UI (`EmployeeTable`, `EmployeeCard`, etc.) são "burros" e apenas recebem dados e funções, enquanto o `useEmployeesStore` (Zustand) atua puramente como um cache de dados brutos da API.
-- **Clean Code**: Adoção de nomes claros para variáveis e funções, baixo aninhamento e complexidade de código, e uso de componentes pequenos e focados (ex: `EmployeeContent` para a lógica de renderização condicional).
+- **Clean Code**: Adoção de nomes claros para variáveis e funções, baixo aninhamento e complexidade de código, e uso de componentes pequenos e focados.
 
-### Performance e Experiência do Usuário (UX)
+### Performance, UX e PWA
 
-- **Debounce na Busca**: Para otimizar a performance, a função de busca aguarda 300ms após o usuário parar de digitar para realizar a filtragem, evitando re-renderizações excessivas e melhorando a fluidez da interação.
-- **Estados de Interface (UI States)**: A aplicação fornece feedback visual claro para diferentes cenários, incluindo um **skeleton loader** durante o carregamento dos dados, uma mensagem para quando a busca não retorna resultados e um alerta em caso de erro na API.
-- **Paginação**: Os dados são paginados para melhorar a performance e a usabilidade, especialmente ao lidar com grandes volumes de registros.
-- **Ordenação de Colunas**: A tabela de funcionários permite a ordenação dinâmica por nome, cargo e data de admissão.
+- **Progressive Web App (PWA)**: A aplicação é um PWA completo, com um `manifest.webmanifest` e ícones, permitindo que seja "instalada" em dispositivos móveis e desktops para uma experiência mais próxima a um app nativo.
+- **Code Splitting Estratégico**: O código da feature principal (`employees`) é separado em seu próprio "chunk" de JavaScript. Isso significa que o bundle inicial carregado pelo navegador é mínimo, e o código da feature só é baixado quando necessário, melhorando o tempo de carregamento inicial.
+- **Lazy Loading de Componentes**: Utilização de `React.lazy` e `Suspense` para carregar componentes de forma preguiçosa, com um **Skeleton Loader** como fallback, melhorando a percepção de velocidade.
+- **Fontes Auto-hospedadas (Self-hosting)**: As fontes do projeto (Roboto) são servidas junto com a aplicação, eliminando requisições a domínios externos (como `fonts.googleapis.com`) e reduzindo a latência para a primeira pintura de conteúdo (FCP).
+- **Pré-carregamento de Dados da API**: Uma tag `<link rel="preload">` no `index.html` instrui o navegador a iniciar o download dos dados dos funcionários em paralelo com os scripts, fazendo com que a renderização do conteúdo principal (LCP) ocorra muito mais rápido.
+- **Debounce na Busca**: Para otimizar a performance, a função de busca aguarda 300ms após o usuário parar de digitar para realizar a filtragem, evitando re-renderizações excessivas.
 
 ### Desenvolvimento e Manutenção (DX)
 
-- **Gerenciamento de Estado Desacoplado**: Utilização do **Zustand** (`useEmployeesStore`) como um cache de dados brutos da API, enquanto toda a lógica de UI (filtros, paginação, ordenação) é gerenciada localmente pelo hook `useEmployeesView`, mantendo o estado global enxuto e a lógica de apresentação contida.
-- **CI/CD com GitHub Actions + Vercel**: A cada `push` ou `pull request` na branch `main` o GitHub Actions executa a suíte de testes (`lint`, `type-check`, `test`). Se tudo estiver ✅, a Vercel dispara o processo de _build_ (`npm run build`) e publica automaticamente a nova versão em produção.
-- **Abstração da Camada de API**: As chamadas de rede são centralizadas em um `apiClient` genérico, desacoplando a aplicação da implementação específica do `fetch`. Isso facilita a manutenção, o tratamento de erros e futuras migrações de tecnologia (ex: para GraphQL).
-- **Scripts Otimizados**: O script `npm run dev` utiliza `concurrently` e `kill-port` para gerenciar os processos da API e do front-end com um único comando, garantindo que as portas sejam liberadas para evitar conflitos (`EADDRINUSE`).
-- **Commits Semânticos**: O histórico de commits segue o padrão **Conventional Commits**, o que torna o histórico mais legível, facilita a revisão do código e permite a automação de changelogs.
-- **Design System com Mantine**: O projeto utiliza o **Mantine** como base para a UI, com um `theme.ts` centralizado que exporta tokens de design (cores, tipografia, etc.), garantindo consistência visual e agilidade no desenvolvimento.
+- **Gerenciamento de Estado Desacoplado**: Utilização do **Zustand** (`useEmployeesStore`) como um cache de dados brutos da API, enquanto toda a lógica de UI (filtros, paginação, ordenação) é gerenciada localmente pelo hook `useEmployeesView`.
+- **CI/CD com GitHub Actions + Vercel**: A cada `push` ou `pull request` na branch `main`, o GitHub Actions executa a suíte de testes (`lint`, `type-check`, `test`). Com a aprovação, a Vercel dispara o processo de _build_ e publica a nova versão.
+- **Abstração da Camada de API**: As chamadas de rede são centralizadas em um `apiClient` genérico, desacoplando a aplicação da implementação específica do `fetch`.
+- **Scripts Otimizados**: O script `npm run dev` utiliza `concurrently` e `kill-port` para gerenciar os processos da API e do front-end com um único comando.
+- **Commits Semânticos**: O histórico de commits segue o padrão **Conventional Commits**.
+- **Design System com Mantine**: O projeto utiliza o **Mantine** como base para a UI, com um `theme.ts` centralizado que exporta tokens de design.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -148,88 +88,17 @@ Este projeto foi desenvolvido utilizando o [React + Vite Boilerplate](https://gi
 - React 19 com TypeScript
 - Vite para build e desenvolvimento
 - Mantine para componentes de UI
-- Arquitetura em camadas
-- Testes com Vitest
-- Qualidade de código com ESLint e Prettier
-
-## 📁 Estrutura do Projeto
-
-```
-.github/
-└── workflows/
-    └── ci.yml          # Workflow de Integração Contínua
-
-src/
-├── api/                # Cliente de API centralizado (abstração do fetch)
-└── features/
-    └── employees/      # Feature principal do desafio
-        ├── api/        # Definição dos endpoints da feature
-        ├── components/ # Componentes da interface (dumb components)
-        ├── hooks/      # Hooks customizados (lógica de apresentação)
-        ├── repository/ # Repositório de dados (abstração da API)
-        ├── store/      # Gerenciamento de estado (cache do Zustand)
-        └── types/      # Tipos TypeScript
-```
-
-## 🧪 Testes
-
-A suíte de testes foi configurada com Vitest e React Testing Library, cobrindo as principais funcionalidades da aplicação:
-
-- **Utilitários**: Funções de formatação.
-- **Repositório**: Interações com a API (mocked).
-- **Hooks**: Lógica de apresentação e regras de negócio.
-- **Stores**: Gerenciamento de estado.
-
-```bash
-# Executar a suíte de testes completa
-npm run test
-
-# Executar os testes em modo watch
-npm run test:watch
-```
-
-## 📚 Documentação
-
-- [🗺️ Roadmap](docs/ROADMAP.md) - Plano de implementação
-- [📋 Plano Detalhado](docs/IMPLEMENTATION_PLAN.md) - Guia passo a passo
-- [✅ Checklist](docs/CHECKLIST.md) - Acompanhamento do progresso
-
-## 🎯 Critérios de Avaliação
-
-### ✅ Implementados
-
-- **Lógica de programação**: Código limpo e bem estruturado (SRP + Clean Code)
-- **Organização**: Arquitetura em camadas e commits organizados (Dependency Rule)
-- **CSS/Estilização**: Design responsivo e consistente
-- **README**: Documentação detalhada com instruções e screenshots
-- **TypeScript**: Tipagem completa (diferencial)
+- Zustand para gerenciamento de estado
+- Vitest e React Testing Library para testes
+- ESLint e Prettier para qualidade de código
 
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 📊 Análise de Performance (Lighthouse)
-
-A performance da aplicação foi auditada utilizando o Google Lighthouse, simulando um ambiente de produção. Os resultados abaixo refletem a qualidade da aplicação em termos de performance, acessibilidade, melhores práticas e SEO.
-
-| Métrica                 | Pontuação |
-| ----------------------- | :-------: |
-| 🟢 Performance          | `100 / 100` |
-| 🟢 Acessibilidade       | `100 / 100` |
-| 🟢 Melhores Práticas    | `100 / 100` |
-| 🟢 SEO                  | `100 / 100` |
-
-### Core Web Vitals
-
-| Métrica                       | Resultado | Avaliação |
-| ----------------------------- | :-------: | :---------: |
-| Largest Contentful Paint (LCP)| `0.6s`    |   🟢 Bom    |
-| Interaction to Next Paint (INP)| `10ms`    |   🟢 Bom    |
-| Cumulative Layout Shift (CLS) | `0`       |   🟢 Bom    |
-
 
 ## 👨‍💻 Autor
 
 **Tiago Vilas Boas**
 
 - **LinkedIn:** [@tiagovilasboas](https://www.linkedin.com/in/tiagovilasboas/)
+- **GitHub:** [@tiagovilasboas](https://github.com/tiagovilasboas)
