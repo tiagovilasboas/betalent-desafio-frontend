@@ -23,7 +23,7 @@ export const formatPhone = (phone: string): string => {
       : cleaned;
 
   const match = sanitized.match(/^(\d{2})(\d{5})(\d{4})$/);
-  return match ? `(${match[1]}) ${match[2]}-${match[3]}` : phone;
+  return match ? `+ (${match[1]}) ${match[2]}-${match[3]}` : phone;
 };
 
 /**
