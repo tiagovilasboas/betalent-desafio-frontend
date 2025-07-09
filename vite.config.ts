@@ -15,7 +15,7 @@ export default defineConfig({
     environment({ NODE_ENV: 'development' }),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      includeAssets: [],
       manifest: {
         name: 'React Vite Boilerplate',
         short_name: 'ReactVite',
