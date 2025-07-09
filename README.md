@@ -1,6 +1,6 @@
 # 🎯 Desafio Front-end BeTalent
 
-### ✨ [Acesse a demonstração ao vivo](https://betalent-desafio-frontend.vercel.app/)
+Demonstração ao vivo: [betalent-desafio-frontend.vercel.app](https://betalent-desafio-frontend.vercel.app/)
 
 Solução para o teste técnico front-end da BeTalent - interface responsiva para visualização de colaboradores com funcionalidade de pesquisa.
 
