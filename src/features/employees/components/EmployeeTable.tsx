@@ -23,6 +23,7 @@ export function EmployeeTable({
 
   const rows = employees.map((employee) => (
     <Table.Tr key={employee.id}>
+      <Table.Td style={{ width: '2%' }} />
       <Table.Td style={{ paddingLeft: '32px' }}>
         <Avatar src={employee.image} alt={employee.name} radius="50%" />
       </Table.Td>
@@ -38,6 +39,7 @@ export function EmployeeTable({
       <Table.Td>
         <Text>{formatPhone(employee.phone)}</Text>
       </Table.Td>
+      <Table.Td style={{ width: '5%' }} />
     </Table.Tr>
   ))
 
@@ -77,9 +79,10 @@ export function EmployeeTable({
         }}
       >
         <Table.Tr>
+          <Table.Th style={{ width: '2%' }} />
           <Table.Th
             style={{
-              width: '15%',
+              width: '13%',
               color: 'inherit',
               paddingLeft: '32px',
             }}
@@ -88,7 +91,7 @@ export function EmployeeTable({
               {t('employees.table.header.photo')}
             </Text>
           </Table.Th>
-          <Table.Th style={{ width: '20%', color: 'inherit' }}>
+          <Table.Th style={{ width: '25%', color: 'inherit' }}>
             <SortableHeader
               label={t('employees.table.header.name')}
               sortKey="name"
@@ -118,11 +121,12 @@ export function EmployeeTable({
               size="sm"
             />
           </Table.Th>
-          <Table.Th style={{ width: '25%', color: 'inherit' }}>
+          <Table.Th style={{ width: '15%', color: 'inherit' }}>
             <Text fw={500} size="sm">
               {t('employees.table.header.phone')}
             </Text>
           </Table.Th>
+          <Table.Th style={{ width: '5%' }} />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
