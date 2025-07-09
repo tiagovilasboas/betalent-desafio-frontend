@@ -1,13 +1,8 @@
 // src/api/apiClient.ts
 
-// Dynamically choose the base URL depending on where the app is running.
-// If we are on localhost we keep using the local JSON-Server (port 3001).
-// In production (e.g. Vercel) we call the serverless function mounted at `/api`.
-const isLocalhost =
-  typeof window !== 'undefined' &&
-  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-
-const API_BASE_URL = isLocalhost ? 'http://localhost:3001' : '/api'
+// Define a URL base da API a partir de variáveis de ambiente.
+// Isso permite configurar a URL para diferentes ambientes (desenvolvimento, produção, etc.).
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
 
 async function client<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`
