@@ -36,7 +36,7 @@ export default defineConfig({
       },
     }),
     visualizer({
-      open: true,
+      open: false,
       gzipSize: true,
       brotliSize: true,
       filename: 'stats.html',
