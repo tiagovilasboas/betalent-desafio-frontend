@@ -50,7 +50,48 @@ O desafio consiste em construir uma interface responsiva que exiba uma tabela de
 
 4. **Acesse a aplicação**: http://localhost:5173
 
-## 🎨 Funcionalidades
+## � Deploy
+
+A aplicação está publicada na **Vercel** e pode ser acessada em:
+
+👉 https://betalent-desafio-frontend.vercel.app/
+
+O deploy é realizado automaticamente a cada _push_ na branch `main`. A Vercel executa a pipeline abaixo, descrita no arquivo `vercel.json`:
+
+1. **Instalação de dependências** (`npm install`)
+2. **Execução da suíte de testes** (`npm test`)
+3. **Build de produção** (`npm run build`)
+4. **Publicação** do diretório `dist` e da _serverless function_ em `api/index.js`.
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": "db.json" }
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.js" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "devCommand": "npm run dev",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
+}
+```
+
+Com isso, o fluxo de **CI/CD** fica totalmente automatizado e sem intervenção manual.
+
+## �🎨 Funcionalidades
 
 ### Tabela de Colaboradores
 
@@ -94,7 +135,7 @@ Além dos requisitos básicos, o projeto foi desenvolvido com foco em qualidade 
 ### Desenvolvimento e Manutenção (DX)
 
 - **Gerenciamento de Estado Desacoplado**: Utilização do **Zustand** (`useEmployeesStore`) como um cache de dados brutos da API, enquanto toda a lógica de UI (filtros, paginação, ordenação) é gerenciada localmente pelo hook `useEmployeesView`, mantendo o estado global enxuto e a lógica de apresentação contida.
-- **CI com GitHub Actions**: O projeto possui um workflow de Integração Contínua que roda a suíte de testes (`lint`, `type-check`, `test`) a cada `push` ou `pull request` na branch `main`, garantindo a estabilidade e a qualidade do código antes da integração.
+- **CI/CD com GitHub Actions + Vercel**: A cada `push` ou `pull request` na branch `main` o GitHub Actions executa a suíte de testes (`lint`, `type-check`, `test`). Se tudo estiver ✅, a Vercel dispara o processo de _build_ (`npm run build`) e publica automaticamente a nova versão em produção.
 - **Abstração da Camada de API**: As chamadas de rede são centralizadas em um `apiClient` genérico, desacoplando a aplicação da implementação específica do `fetch`. Isso facilita a manutenção, o tratamento de erros e futuras migrações de tecnologia (ex: para GraphQL).
 - **Scripts Otimizados**: O script `npm run dev` utiliza `concurrently` e `kill-port` para gerenciar os processos da API e do front-end com um único comando, garantindo que as portas sejam liberadas para evitar conflitos (`EADDRINUSE`).
 - **Commits Semânticos**: O histórico de commits segue o padrão **Conventional Commits**, o que torna o histórico mais legível, facilita a revisão do código e permite a automação de changelogs.
