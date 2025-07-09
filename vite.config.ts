@@ -59,12 +59,6 @@ export default defineConfig({
             return 'employees-feature';
           }
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'framework-vendor';
-            }
-            if (id.includes('@mantine') || id.includes('@emotion')) {
-              return 'mantine-vendor';
-            }
             return 'vendor';
           }
         },
